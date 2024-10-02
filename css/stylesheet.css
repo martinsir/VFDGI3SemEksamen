@@ -1,4 +1,4 @@
-/* styles.css */
+/* Mobile-first styles (default) */
 body {
     background-color: #fff387;
     font-family: Arial, sans-serif;
@@ -154,4 +154,57 @@ body {
     margin-top: 15px;
     font-size: 16px;
     color: #333;
+}
+
+
+
+/* Tablets (min-width: 768px) */
+@media (min-width: 768px) {
+    .home-container, .quiz-container {
+        max-width: 600px;
+        padding: 30px;
+    }
+
+    .navbar {
+        gap: 20px;
+        padding: 15px;
+    }
+
+    .button-item {
+        width: calc(33.33% - 20px); /* Display three elements side by side */
+    }
+}
+
+/* Desktops (min-width: 1024px) */
+@media (min-width: 1024px) {
+    .home-container, .quiz-container {
+        max-width: 800px;
+        padding: 40px;
+    }
+
+    .header {
+        justify-content: space-around;
+    }
+
+    .navbar {
+        padding: 20px;
+        gap: 30px;
+    }
+
+    .button-item {
+        width: calc(25% - 20px); /* Display four elements side by side */
+    }
+
+    #question {
+        font-size: 24px;
+    }
+
+    #options-container button {
+        font-size: 20px;
+    }
+
+    #next-btn {
+        font-size: 22px;
+        padding: 15px 25px;
+    }
 }
