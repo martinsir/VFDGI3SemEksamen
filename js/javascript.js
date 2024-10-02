@@ -1,4 +1,4 @@
-// quiz.js
+// javascript.js
 const questions = [
     {
         question: "Hvad bruges Moodle hovedsageligt til som studerende på Zealand?",
@@ -162,3 +162,52 @@ function startQuiz() {
     document.getElementById('quiz-container').classList.add('active');
     showQuestion();
 }
+
+//billede-section
+
+document.addEventListener("DOMContentLoaded", function () {
+    const elements = document.querySelectorAll('.button-item img');
+
+    function two() {
+        for (let i = 0; i < elements.length; i++) {
+            elements[i].style.flex = "50%"; // Gør hver button-item til 50% bredde
+        }
+    }
+
+    // Kald funktionen for at sikre to billeder vises side om side
+    two();
+});
+
+//window.onload sikrer, at alt indhold på siden er blevet indlæst, før animationen starter.
+    window.onload = function () {
+    const navbar = document.querySelector('.navbar');
+    const buttonSection = document.querySelector('.button-section');
+
+    // Scroll navigationsbaren en smule frem og tilbage med smooth effect
+    setTimeout(() => {
+        navbar.scrollTo({
+            left: 100,
+            behavior: 'smooth'
+        });
+        setTimeout(() => {
+            navbar.scrollTo({
+                left: 0,
+                behavior: 'smooth'
+            });
+        }, 800);
+    }, 3000);
+
+    // Scroll button-sektionen en smule op og ned med smooth effect
+    setTimeout(() => {
+        buttonSection.scrollTo({
+            top: 100,
+            behavior: 'smooth'
+        });
+        setTimeout(() => {
+            buttonSection.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }, 800);
+    }, 5000);
+};
