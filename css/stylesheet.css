@@ -165,6 +165,24 @@ body {
     background-color: #f44336  !important; /* Lys rød for forkert svar */
     color: #000!important;
 }
+/*progress quiz */
+
+#progress-container {
+    width: 100%;
+    background-color: #f4f4f4;
+    border-radius: 10px;
+    margin: 20px 0;
+    height: 20px;
+    overflow: hidden;
+}
+
+#progress-bar {
+    width: 0%;
+    height: 100%;
+    background-color: #4caf50; /* Grøn farve for at indikere fremskridt */
+    transition: width 0.5s ease; /* Smooth overgang, når progressen øges */
+}
+
 
 
 
@@ -184,9 +202,6 @@ body {
         width: calc(33.33% - 20px); /* Display three elements side by side */
     }
 }
-
-
-
 
 /* Desktops (min-width: 1024px) */
 @media (min-width: 1024px) {

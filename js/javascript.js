@@ -95,15 +95,20 @@ let currentQuestionIndex = 0;
 function showQuestion() {
     const questionElement = document.getElementById('question');
     const optionsContainer = document.getElementById('options-container');
-    const progressElement = document.getElementById('progress');
+    //const progressElement = document.getElementById('progress');
     const feedbackElement = document.getElementById('feedback');
+    const progressBar = document.getElementById('progress-bar');
 
     const currentQuestion = questions[currentQuestionIndex];
 
     // Opdater spørgsmål og progress
     questionElement.innerText = currentQuestion.question;
-    progressElement.innerText = `Spørgsmål ${currentQuestionIndex + 1} af ${questions.length}`;
+   // progressElement.innerText = `Spørgsmål ${currentQuestionIndex + 1} af ${questions.length}`;
     feedbackElement.innerText = '';  // Ryd feedback fra tidligere spørgsmål
+
+    //progressBar
+    const progressPercentage = ((currentQuestionIndex + 1) / questions.length) * 100;
+    progressBar.style.width = progressPercentage + '%';
 
     // Fjern gamle knapper
     optionsContainer.innerHTML = '';
