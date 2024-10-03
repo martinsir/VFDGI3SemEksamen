@@ -127,7 +127,7 @@ function checkAnswer(selectedIndex, button) {
         button.classList.add('correct');
         feedbackElement.innerText = "Korrekt! " + currentQuestion.feedback;
     } else {
-        button.classList.add('incorrect');
+        button.classList.add('incorrect');                                              //farve bliver ikke vist rigtigt
         buttons[currentQuestion.correct].classList.add('correct');
         feedbackElement.innerText = "Forkert! " + currentQuestion.feedback;
     }
