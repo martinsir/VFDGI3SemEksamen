@@ -165,6 +165,7 @@ function showCompletion() {
 function startQuiz() {
     document.getElementById('home-container').classList.remove('active');
     document.getElementById('quiz-container').classList.add('active');
+    document.getElementById('progress-container').style.display = 'block';
     showQuestion();
 }
 

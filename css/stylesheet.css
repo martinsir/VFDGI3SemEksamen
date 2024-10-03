@@ -165,15 +165,20 @@ body {
     background-color: #f44336  !important; /* Lys rød for forkert svar */
     color: #000!important;
 }
-/*progress quiz */
+/*progress bar style */
 
 #progress-container {
+    display: none;
     width: 100%;
     background-color: #f4f4f4;
     border-radius: 10px;
     margin: 20px 0;
     height: 20px;
     overflow: hidden;
+    position: fixed; /* Fastgjort til toppen af siden */
+    top: 0;
+    left: 0;
+    z-index: 100;
 }
 
 #progress-bar {
@@ -182,7 +187,6 @@ body {
     background-color: #4caf50; /* Grøn farve for at indikere fremskridt */
     transition: width 0.5s ease; /* Smooth overgang, når progressen øges */
 }
-
 
 
 
