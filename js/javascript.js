@@ -1,3 +1,4 @@
+// Quiz spørgsmål
 const questions = [
     {
         question: "Hvad bruges Moodle hovedsageligt til som studerende på Zealand?",
@@ -88,176 +89,177 @@ const questions = [
         feedback: "Alt dit kursusmateriale bliver lagt op på Moodle, så du har adgang til det døgnet rundt."
     }
 ];
-///////////////////////////////////////////Quiz Questions END//////////////////////////////////////
 
+let currentQuestionIndex = 0;
+let timeLeft = 30; // Starttid for nedtælling
+let countdown;
+let correctAnswersCount = 0; // Tæller for rigtige svar
+let timeChange = 0; // Variabel til at holde styr på tidsændringen
 
-/////////////////////////////////////////////////Logic//////////////////////////////////////
-document.addEventListener("DOMContentLoaded", function() {
-    const timerCanvas = document.getElementById('timerCanvas');
-    const ctx = timerCanvas.getContext('2d');
-    let currentQuestionIndex = 0;
-    let correctAnswersCount = 0;
-    let countdown; // Variable for at holde styr på nedtællingen
-    let timeLeft = 30; // Global variable for at holde styr på resterende tid
-    const totalTime = 30; // Total tid for nedtælling
+// Start quizzen
+function startQuiz() {
+    document.getElementById('home-container').classList.remove('active');
+    document.getElementById('quiz-container').style.display = 'block'; // Vis quiz-container
+    document.getElementById('progress-container').style.display = 'block'; // Vis progress bar
+    document.getElementById('result').style.display = 'none'; // Skjul resultattavlen
+    document.getElementById('home-btn').style.display = 'none'; // Skjul knappen til forsiden
+    startTimer(); // Start timeren
+    showQuestion(); // Vis det første spørgsmål
+    timeChange = 0; // Reset timeChange til 0
+}
 
-    function startQuiz() {
-        // Skjul startsiden og vis quiz-sektionen
-        document.getElementById('home-container').classList.remove('active');
-        document.getElementById('home-container').style.display = 'none';
+// Start nedtælling
+function startTimer() {
+    const timerCircle = document.querySelector('.timer-circle circle');
+    const radius = 45; // Radius af cirklen
+    const circumference = 2 * Math.PI * radius; // Beregn cirkelens omkreds
+    timerCircle.setAttribute('stroke-dasharray', circumference);
+    timerCircle.setAttribute('stroke-dashoffset', circumference); // Start med fuld cirkel
 
-        document.getElementById('quiz-container').classList.add('active');
-        document.getElementById('quiz-container').style.display = 'block';
+   // document.getElementById('time-left').textContent = timeLeft; // Vis tid
+    document.getElementById('time-text').textContent = timeLeft; // Vis initial tid i cirklen
 
-        // Vis progress-baren og timeren
-        document.getElementById('progress-container').style.display = 'block';
-        timerCanvas.style.display = 'block';
+    countdown = setInterval(() => {
+        timeLeft--;
+        //document.getElementById('time-left').textContent = timeLeft; // Opdater tid
+        document.getElementById('time-text').textContent = timeLeft; // Opdater teksten i cirklen
 
-        // Skjul "Gå tilbage til forsiden"-knappen
-        document.getElementById('back-btn').style.display = 'none';
+        const offset = circumference - (timeLeft / 30) * circumference; // Beregn ny offset baseret på den tilbageværende tid
+        timerCircle.setAttribute('stroke-dashoffset', offset); // Opdater cirkelens offset
 
-        // Nulstil tiden til 30 sekunder, når quizzen starter
-        timeLeft = 30;
-
-        // Start timeren og animationen
-        startTimer();
-
-        // Start quizzen ved at vise første spørgsmål
-        showQuestion();
-    }
-
-    function startTimer() {
-        if (countdown) {
+        if (timeLeft <= 0) {
             clearInterval(countdown);
+            showCompletion(); // Gå til completion hvis tiden løber ud
         }
+    }, 1000);
+}
 
-        countdown = setInterval(() => {
-            timeLeft--;
-            drawTimer();
-            if (timeLeft <= 0) {
-                clearInterval(countdown);
-                timeIsUp();
-            }
-        }, 1000);
+// Vis spørgsmål
+function showQuestion() {
+    const questionElement = document.getElementById('question');
+    const optionsContainer = document.getElementById('options-container');
+    const feedbackElement = document.getElementById('feedback');
+    const progressBar = document.getElementById('progress-bar');
 
-        drawTimer(); // Start med at tegne timeren
+    const currentQuestion = questions[currentQuestionIndex];
+
+    // Opdater spørgsmål og feedback
+    questionElement.innerText = currentQuestion.question;
+    feedbackElement.innerText = '';
+
+    // Opdater progress bar
+    const progressPercentage = ((currentQuestionIndex + 1) / questions.length) * 100;
+    progressBar.style.width = progressPercentage + '%';
+
+    // Fjern gamle knapper
+    optionsContainer.innerHTML = '';
+
+    // Tilføj nye knapper til hvert svar
+    currentQuestion.options.forEach((option, index) => {
+        const button = document.createElement('button');
+        button.innerText = option;
+        button.onclick = () => checkAnswer(index, button);
+        optionsContainer.appendChild(button);
+    });
+}
+
+
+// Tjek svar
+function checkAnswer(selectedIndex, button) {
+    const currentQuestion = questions[currentQuestionIndex];
+    const buttons = document.getElementById('options-container').children;
+    const feedbackElement = document.getElementById('feedback');
+
+    let timeChange = 0; // Variabel til at holde styr på den aktuelle ændring
+
+    // Kontrollér om svaret er korrekt
+    if (selectedIndex === currentQuestion.correct) {
+        button.classList.add('correct');
+        feedbackElement.innerText = "Korrekt! " + currentQuestion.feedback;
+        correctAnswersCount++; // Incrementer tælleren for rigtige svar
+        timeChange += 3; // Tilføj 3 sekunder ved korrekt svar
+        timeLeft += 3; // Opdater den samlede tid
+
+        // Opdater visning af tidændring
+        const timeChangeText = `+${timeChange} s`;
+        document.getElementById('time-text').textContent = timeChangeText; // Vis tidændring
+        document.getElementById('time-text').style.fill = '#4caf50'; // Grøn farve
+    } else {
+        button.classList.add('incorrect');
+        buttons[currentQuestion.correct].classList.add('correct');
+        feedbackElement.innerText = "Forkert! " + currentQuestion.feedback;
+        timeChange -= 5; // Træk 5 sekunder fra ved forkert svar
+        timeLeft -= 5; // Opdater den samlede tid
+
+        // Opdater visning af tidændring
+        const timeChangeText = `${timeChange} s`;
+        document.getElementById('time-text').textContent = timeChangeText; // Vis tidændring
+        document.getElementById('time-text').style.fill = '#f44336'; // Rød farve
     }
 
-    function drawTimer() {
-        const radius = 70;
-        const lineWidth = 10;
+    // Deaktiver knapper for at forhindre flere klik
+    Array.from(buttons).forEach(btn => btn.disabled = true);
 
-        ctx.clearRect(0, 0, timerCanvas.width, timerCanvas.height);
-        ctx.beginPath();
-        ctx.arc(timerCanvas.width / 2, timerCanvas.height / 2, radius, 0, 2 * Math.PI);
-        ctx.strokeStyle = '#f4f4f4';
-        ctx.lineWidth = lineWidth;
-        ctx.stroke();
+    // Stop timeren
+    clearInterval(countdown);
 
-        const startAngle = -0.5 * Math.PI;
-        const endAngle = startAngle + (2 * Math.PI) * (timeLeft / totalTime);
-        ctx.beginPath();
-        ctx.arc(timerCanvas.width / 2, timerCanvas.height / 2, radius, startAngle, endAngle);
-        ctx.strokeStyle = '#4caf50';
-        ctx.lineWidth = lineWidth;
-        ctx.stroke();
-
-        ctx.fillStyle = '#000';
-        ctx.font = 'bold 18px Arial';
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-        ctx.fillText(`${timeLeft}s`, timerCanvas.width / 2, timerCanvas.height / 2);
-    }
-
-    function checkAnswer(selectedIndex, button) {
-        const currentQuestion = questions[currentQuestionIndex];
-        const buttons = document.getElementById('options-container').children;
-        const feedbackElement = document.getElementById('feedback');
-
-        if (selectedIndex === currentQuestion.correct) {
-            button.classList.add('correct');
-            feedbackElement.innerText = "Korrekt! " + currentQuestion.feedback;
-            correctAnswersCount++;
-            timeLeft = Math.min(timeLeft + 2, totalTime); // Tilføj tid, men ikke over totalen
-            drawTimer();
-        } else {
-            button.classList.add('incorrect');
-            buttons[currentQuestion.correct].classList.add('correct');
-            feedbackElement.innerText = "Forkert! " + currentQuestion.feedback;
-        }
-
-        Array.from(buttons).forEach(btn => btn.disabled = true);
-        document.getElementById('next-btn').style.display = 'block';
-        clearInterval(countdown); // Stop nedtællingen
-    }
-
-    function nextQuestion() {
-        currentQuestionIndex++;
-        if (currentQuestionIndex < questions.length) {
-            document.getElementById('next-btn').style.display = 'none';
-            startTimer();
-            showQuestion();
-        } else {
-            showCompletion(); // Vis resultattavlen, når quizzen er færdig
-        }
-    }
+    // Vis knappen "Næste"
+    document.getElementById('next-btn').style.display = 'block';
+}
 
 
-    function goBackToHome() {
-        document.getElementById('quiz-container').classList.remove('active');
-        document.getElementById('quiz-container').style.display = 'none';
-        document.getElementById('home-container').classList.add('active');
-        document.getElementById('home-container').style.display = 'block';
-        document.getElementById('progress-container').style.display = 'none';
-        timerCanvas.style.display = 'none';
-        currentQuestionIndex = 0;
-        correctAnswersCount = 0;
-        document.getElementById('back-btn').style.display = 'none';
-        ctx.clearRect(0, 0, timerCanvas.width, timerCanvas.height);
-    }
-
-    function showQuestion() {
-        const questionElement = document.getElementById('question');
-        const optionsContainer = document.getElementById('options-container');
-        const feedbackElement = document.getElementById('feedback');
-        const progressBar = document.getElementById('progress-bar');
-
-        const currentQuestion = questions[currentQuestionIndex];
-        questionElement.innerText = currentQuestion.question;
-        feedbackElement.innerText = '';
-        progressBar.style.width = ((currentQuestionIndex + 1) / questions.length) * 100 + '%';
-        optionsContainer.innerHTML = '';
-
-        currentQuestion.options.forEach((option, index) => {
-            const button = document.createElement('button');
-            button.innerText = option;
-            button.onclick = () => checkAnswer(index, button);
-            optionsContainer.appendChild(button);
-        });
-    }
-
-    function timeIsUp() {
-        document.getElementById('question').innerText = "Tiden er løbet ud!";
-        document.getElementById('options-container').innerHTML = '';
-        document.getElementById('feedback').innerText = `Du havde ${correctAnswersCount} ud af ${questions.length} spørgsmål rigtige. Prøv igen!`;
+// Gå til næste spørgsmål
+function nextQuestion() {
+    currentQuestionIndex++;
+    if (currentQuestionIndex < questions.length) {
+        showQuestion();
         document.getElementById('next-btn').style.display = 'none';
-        document.getElementById('back-btn').style.display = 'block';
-        timerCanvas.style.display = 'none'; // Skjul timeren
+        startTimer(); // Timeren fortsætter fra den tid, den var på.
+    } else {
+        showCompletion();
+    }
+}
+
+// Vis resultattavle
+function showCompletion() {
+    clearInterval(countdown); // Stop timeren
+    document.getElementById('question').innerText = "Quiz afsluttet! Tak for din deltagelse.";
+    document.getElementById('options-container').innerHTML = '';
+    document.getElementById('feedback').innerText = '';
+    document.getElementById('next-btn').style.display = 'none';
+
+    // Vis resultattavle
+    const resultElement = document.getElementById('result');
+    resultElement.innerText = `Du havde ${correctAnswersCount} rigtige svar ud af ${questions.length}.`;
+    resultElement.style.display = 'block'; // Vis resultattavlen
+
+    // Vis knappen til at gå tilbage til forsiden
+    document.getElementById('home-btn').style.display = 'block';
+}
+
+// Gå tilbage til forsiden
+function goToHome() {
+    document.getElementById('quiz-container').style.display = 'none'; // Skjul quiz-container
+    document.getElementById('home-container').classList.add('active'); // Vis forsiden
+    currentQuestionIndex = 0; // Reset spørgsmål index
+    correctAnswersCount = 0; // Reset tæller for rigtige svar
+    timeLeft = 30; // Reset timeren
+    clearInterval(countdown); // Stop timeren, hvis den kører
+
+    // Skjul knappen "Tilbage til Forside" igen
+    document.getElementById('home-btn').style.display = 'none';
+}
+
+// Billede-section
+document.addEventListener("DOMContentLoaded", function () {
+    const elements = document.querySelectorAll('.button-item img');
+
+    function two() {
+        for (let i = 0; i < elements.length; i++) {
+            elements[i].style.flex = "50%"; // Gør hver button-item til 50% bredde
+        }
     }
 
-    function showCompletion() {
-        document.getElementById('question').innerText = "Quiz afsluttet! Tak for din deltagelse.";
-        document.getElementById('options-container').innerHTML = '';
-        document.getElementById('feedback').innerText = `Du havde ${correctAnswersCount} ud af ${questions.length} spørgsmål rigtige.`;
-        document.getElementById('next-btn').style.display = 'none';
-        document.getElementById('back-btn').style.display = 'block';
-        timerCanvas.style.display = 'none'; // Skjul timeren
-    }
-
-
-    // Gør "startQuiz" funktionen global, så den kan tilgås fra HTML
-    window.startQuiz = startQuiz;
-    window.nextQuestion = nextQuestion;
-    window.goBackToHome = goBackToHome;
+    // Kald funktionen for at sikre to billeder vises side om side
+    two();
 });
-

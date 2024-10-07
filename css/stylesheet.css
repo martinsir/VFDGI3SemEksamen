@@ -7,8 +7,6 @@ body {
     justify-content: center;
     min-height: 100vh;
     margin: 0;
-    overflow-y: scroll; /* Tillad lodret scrolling generelt */
-    line-height: 1.5;
 }
 
 /* Container styling */
@@ -37,19 +35,14 @@ body {
 }
 
 .logo {
-    font-size: 24px;
-    font-weight: bold;
-    color: #333;
     width: 90px;
-    height: 20px;
-    margin-right: 10px;
-    margin-left: 10px;
+    height: auto; /* Behold proportioner */
+    margin: 0 10px; /* Ens margin for bedre layout */
 }
 
 .navbar {
     display: flex;
-    overflow-x: auto; /* Tillad vandret scroll */
-    white-space: nowrap; /* Tving alt indhold til at være på én linje */
+    overflow-x: auto;
     background-color: #f4f4f4;
     padding: 10px;
     border-radius: 20px;
@@ -68,7 +61,7 @@ body {
     gap: 20px;
     justify-content: center;
     max-height: 400px;
-    overflow-y: auto; /* Tillad lodret scroll */
+    overflow-y: auto;
     padding: 20px;
     background-color: #fff387;
 }
@@ -128,11 +121,6 @@ body {
     margin-top: 20px;
 }
 
-#progress {
-    margin-bottom: 15px;
-    font-size: 16px;
-}
-
 #feedback {
     margin-top: 15px;
     font-size: 16px;
@@ -151,17 +139,12 @@ body {
 
 /* Progress bar style */
 #progress-container {
-    display: none; /* Skjul som standard */
+    display: block; /* Vis som standard */
     width: 100%;
     background-color: #f4f4f4;
     border-radius: 10px;
     margin: 20px 0;
     height: 20px;
-    overflow: hidden;
-    position: fixed; /* Fastgjort til toppen af siden */
-    top: 0;
-    left: 0;
-    z-index: 100;
 }
 
 #progress-bar {
@@ -170,43 +153,71 @@ body {
     background-color: #4caf50; /* Grøn farve for at indikere fremskridt */
     transition: width 0.5s ease; /* Smooth overgang, når progressen øges */
 }
-/*Gå tilbage knappen*/
-#back-btn {
-    background-color: #008CBA; /* Blå farve */
-    color: #ffffff; /* Hvid tekst */
-    padding: 12px 24px;
-    border: none;
-    cursor: pointer;
-    border-radius: 25px; /* Rundede hjørner for at gøre knappen pænere */
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Pop up tid */
+.pop {
+    animation: pop 0.3s ease-in-out;
+}
+
+@keyframes pop {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Styling for timer */
+#time-text {
+    font-family: Arial, sans-serif; /* Vælg en passende skrifttype */
+    pointer-events: none; /* Forhindrer klik på teksten */
+    font-size: 16px; /* Juster størrelsen, hvis nødvendigt */
+}
+
+.timer-circle {
+    position: relative;
+    margin: 0 auto; /* Centrerer cirklen */
+}
+
+.timer-circle circle {
+    transition: stroke-dashoffset 1s linear; /* Glidende animation */
+}
+
+/* Styling for timer sektionen */
+#time-text {
+    font-family: Arial, sans-serif;
+    pointer-events: none; /* Forhindrer klik på teksten */
+    font-size: 16px; /* Juster fontstørrelse efter behov */
+    text-align: center; /* Centrer teksten i cirklen */
+}
+
+#time-change {
+    font-family: Arial, sans-serif;
+    pointer-events: none; /* Forhindrer klik på teksten */
+    color: #333; /* Standard farve */
+    font-size: 14px; /* Juster skrifttype efter behov */
+}
+
+
+/* Styling for resultattavlen */
+#result {
+    margin-top: 20px;
     font-size: 18px;
+    color: #333;
     font-weight: bold;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Let skygge for dybdeeffekt */
-    transition: background-color 0.3s ease, transform 0.2s ease; /* Blød overgang */
-    margin-top: 20px; /* Tilføj lidt afstand til toppen */
-}
-
-#back-btn:hover {
-    background-color: #005f73; /* Mørkere blå ved hover */
-    transform: scale(1.05); /* Lidt større ved hover */
-}
-
-#back-btn:active {
-    transform: scale(0.95); /* Lidt mindre ved klik */
-}
-
-/* Tilføj en wrapper til knappen og centrer den */
-.back-btn-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 30px; /* Giver afstand fra feedback sektionen */
-}
-
-
-/* Timer styling */
-#timerCanvas {
-    display: none; /* Skjul som standard */
-    margin: 20px auto; /* Centrer canvas'en horisontalt og tilføj margin for plads */
 }
 
 /* Tablets (min-width: 768px) */
@@ -223,7 +234,7 @@ body {
     }
 
     .button-item {
-        width: calc(33.33% - 20px); /* Display tre elementer side om side */
+        width: calc(33.33% - 20px); /* Vis tre elementer side om side */
     }
 }
 
@@ -245,7 +256,7 @@ body {
     }
 
     .button-item {
-        width: calc(25% - 20px); /* Display fire elementer side om side */
+        width: calc(25% - 20px); /* Vis fire elementer side om side */
     }
 
     #question {
