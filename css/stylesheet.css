@@ -121,20 +121,31 @@ body {
     margin-top: 20px;
 }
 
+/* Styling for feedback sektionen */
 #feedback {
+    display: none; /* Skjul som standard */
     margin-top: 15px;
-    font-size: 16px;
-    color: #333;
+    font-size: 18px; /* Større tekst */
+    font-weight: bold; /* Gør teksten fed */
+    padding: 10px; /* Tilføj polstring */
+    border-radius: 5px; /* Afrund hjørnerne */
+    transition: all 0.3s ease; /* Blød overgang */
 }
 
-.correct {
-    background-color: #4caf50 !important; /* Lys grøn for korrekt svar */
-    color: #000 !important;
+
+
+/* Korrekt feedback */
+.correct-feedback {
+    background-color: #4caf50; /* Lys grøn */
+    color: #fff; /* Hvid tekst */
+    box-shadow: 0 4px 10px rgba(76, 175, 80, 0.5); /* Skygge for dybde */
 }
 
-.incorrect {
-    background-color: #f44336 !important; /* Lys rød for forkert svar */
-    color: #000 !important;
+/* Forkert feedback */
+.incorrect-feedback {
+    background-color: #f44336; /* Lys rød */
+    color: #fff; /* Hvid tekst */
+    box-shadow: 0 4px 10px rgba(244, 67, 54, 0.5); /* Skygge for dybde */
 }
 
 /* Progress bar style */
@@ -163,22 +174,24 @@ body {
     }
 }
 
-/* Pop up tid */
+/* Animation ved visning */
 .pop {
-    animation: pop 0.3s ease-in-out;
+    animation: pop 0.3s ease-in-out; /* Tilføj pop animation */
 }
+
 
 @keyframes pop {
     0% {
         transform: scale(1);
     }
     50% {
-        transform: scale(1.2);
+        transform: scale(1.1);
     }
     100% {
         transform: scale(1);
     }
 }
+
 
 /* Styling for timer */
 #time-text {

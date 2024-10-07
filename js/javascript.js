@@ -163,38 +163,34 @@ function showQuestion() {
     });
 }
 
-
 // Tjek svar
 function checkAnswer(selectedIndex, button) {
     const currentQuestion = questions[currentQuestionIndex];
     const buttons = document.getElementById('options-container').children;
     const feedbackElement = document.getElementById('feedback');
 
-    let timeChange = 0; // Variabel til at holde styr på den aktuelle ændring
+    // Vis feedback-sektionen
+    feedbackElement.style.display = 'block'; // Sørg for feedback er synlig
+
+    // Reset feedback
+    feedbackElement.classList.remove('correct-feedback', 'incorrect-feedback');
+    feedbackElement.innerText = ''; // Tøm feedback
 
     // Kontrollér om svaret er korrekt
     if (selectedIndex === currentQuestion.correct) {
         button.classList.add('correct');
         feedbackElement.innerText = "Korrekt! " + currentQuestion.feedback;
         correctAnswersCount++; // Incrementer tælleren for rigtige svar
-        timeChange += 3; // Tilføj 3 sekunder ved korrekt svar
-        timeLeft += 3; // Opdater den samlede tid
-
-        // Opdater visning af tidændring
-        const timeChangeText = `+${timeChange} s`;
-        document.getElementById('time-text').textContent = timeChangeText; // Vis tidændring
-        document.getElementById('time-text').style.fill = '#4caf50'; // Grøn farve
+        timeLeft += 3; // Tilføj 3 sekunder ved korrekt svar
+        timeChange += 3; // Opdater tidændring
+        feedbackElement.classList.add('correct-feedback'); // Tilføj korrekt feedback klasse
     } else {
         button.classList.add('incorrect');
         buttons[currentQuestion.correct].classList.add('correct');
         feedbackElement.innerText = "Forkert! " + currentQuestion.feedback;
-        timeChange -= 5; // Træk 5 sekunder fra ved forkert svar
-        timeLeft -= 5; // Opdater den samlede tid
-
-        // Opdater visning af tidændring
-        const timeChangeText = `${timeChange} s`;
-        document.getElementById('time-text').textContent = timeChangeText; // Vis tidændring
-        document.getElementById('time-text').style.fill = '#f44336'; // Rød farve
+        timeLeft -= 5; // Fjerne 5 sekunder ved forkert svar
+        timeChange -= 5; // Opdater tidændring
+        feedbackElement.classList.add('incorrect-feedback'); // Tilføj forkert feedback klasse
     }
 
     // Deaktiver knapper for at forhindre flere klik
@@ -208,17 +204,21 @@ function checkAnswer(selectedIndex, button) {
 }
 
 
+
+
 // Gå til næste spørgsmål
 function nextQuestion() {
     currentQuestionIndex++;
-    if (currentQuestionIndex < questions.length) {
+    if (currentQuestionIndex < questions.length ) {
         showQuestion();
         document.getElementById('next-btn').style.display = 'none';
+        document.getElementById('feedback').style.display = 'none'; // Skjul feedback
         startTimer(); // Timeren fortsætter fra den tid, den var på.
     } else {
         showCompletion();
     }
 }
+
 
 // Vis resultattavle
 function showCompletion() {
@@ -232,6 +232,7 @@ function showCompletion() {
     const resultElement = document.getElementById('result');
     resultElement.innerText = `Du havde ${correctAnswersCount} rigtige svar ud af ${questions.length}.`;
     resultElement.style.display = 'block'; // Vis resultattavlen
+    document.getElementById('feedback').style.display = 'none'; // Skjul feedback
 
     // Vis knappen til at gå tilbage til forsiden
     document.getElementById('home-btn').style.display = 'block';
