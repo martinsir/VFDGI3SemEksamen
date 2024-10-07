@@ -7,15 +7,13 @@
     <title>Zealand Studiestarts Web App</title>
 </head>
 <body>
+
 <!-- Forside -->
 <div class="home-container active" id="home-container">
     <!-- Logo og Navigation Bar -->
     <div class="header">
-
         <img src="images/logo/ZealandLogoMoodle.png" alt="Zealand" class="logo">
-
-
-        <div class="navbar" >
+        <div class="navbar">
             <div class="nav-item"><img src="images/icons/book.png" alt="Book"></div>
             <div class="nav-item"><img src="images/icons/moodle.png" alt="Moodle"></div>
             <div class="nav-item"><img src="images/icons/calendar.png" alt="Calendar"></div>
@@ -25,17 +23,13 @@
             <div class="nav-item"><img src="images/icons/canteen.png" alt="Tools"></div>
             <div class="nav-item"><img src="images/icons/megaphone_596092.png" alt="Tools"></div>
             <div class="nav-item"><img src="images/icons/settings.png" alt="Tools"></div>
-
         </div>
-
     </div>
-
 
     <!-- Midtersektion med knapper/billeder -->
     <div class="button-section">
         <div class="button-item" onclick="startQuiz()">
             <img src="images/thumbnails/quiz-thumbnail.png" alt="Quiz Thumbnail">
-
         </div>
 
         <div class="button-item">
@@ -45,49 +39,25 @@
         <div class="button-item">
             <img src="images/thumbnails/info-thumbnail.png" alt="Info Thumbnail">
         </div>
-
-        <div class="button-item">
-            <img src="images/thumbnails/info-thumbnail.png" alt="Info Thumbnail">
-        </div>
-
-        <div class="button-item">
-            <img src="images/thumbnails/info-thumbnail.png" alt="Info Thumbnail">
-        </div>
-
-        <div class="button-item">
-            <img src="images/thumbnails/info-thumbnail.png" alt="Info Thumbnail">
-        </div>
-
-        <div class="button-item">
-            <img src="images/thumbnails/info-thumbnail.png" alt="Info Thumbnail">
-        </div>
-
-        <div class="button-item">
-            <img src="images/thumbnails/info-thumbnail.png" alt="Info Thumbnail">
-        </div>
-
-        <div class="button-item">
-            <img src="images/thumbnails/info-thumbnail.png" alt="Info Thumbnail">
-        </div>
-
     </div>
 </div>
 
-<!-- Quiz Container -->
-<div class="quiz-container" id="quiz-container">
-    <div id="question-container">
-        <div id="progress"></div>
-        <h2 id="question">Spørgsmål vises her</h2>
-        <div id="options-container"></div>
-        <div id="feedback"></div>
-    </div>
-    <button id="next-btn" onclick="nextQuestion()">Næste</button>
-</div>
-
-<div id="progress-container">
+<!-- Progress-bar -->
+<div id="progress-container" style="display: none;">
     <div id="progress-bar"></div>
 </div>
 
+<!-- Quizsektion -->
+<div id="quiz-container" class="quiz-container" style="display: none;">
+    <canvas id="timerCanvas" width="150" height="150" style="display: none;"></canvas>
+    <div id="question"></div>
+    <div id="options-container"></div>
+    <div id="feedback"></div>
+    <button id="next-btn" onclick="nextQuestion()" style="display: none;">Næste spørgsmål</button>
+    <div class="back-btn-container">
+        <button id="back-btn" onclick="goBackToHome()" style="display: none;">Gå tilbage til forsiden</button>
+    </div>
+</div>
 
 <script src="js/javascript.js"></script>
 

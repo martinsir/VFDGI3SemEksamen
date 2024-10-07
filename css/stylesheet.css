@@ -1,37 +1,31 @@
 /* Mobile-first styles (default) */
 body {
     background-color: #fff387;
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     display: flex;
     align-items: center;
     justify-content: center;
     min-height: 100vh;
     margin: 0;
-    overflow: hidden;
+    overflow-y: scroll; /* Tillad lodret scrolling generelt */
     line-height: 1.5;
-
 }
 
-.container {
-    -ms-overflow-style: none;  /* Internet Explorer 10+ */
-    scrollbar-width: none;  /* Firefox */
-}
-.container::-webkit-scrollbar {
-    display: none;  /* Safari and Chrome */
-}
-
-.home-container, .quiz-container {
+/* Container styling */
+.home-container,
+.quiz-container {
     width: 100%;
     max-width: 450px;
     background-color: #ffffff;
     border-radius: 10px;
     padding: 20px;
     text-align: center;
-    display: none;
+    display: none; /* Skjul dem som standard */
 }
 
-.home-container.active, .quiz-container.active {
-    display: block;
+.home-container.active,
+.quiz-container.active {
+    display: block; /* Vis dem kun når de er aktive */
 }
 
 /* Header med logo og navigation */
@@ -46,22 +40,16 @@ body {
     font-size: 24px;
     font-weight: bold;
     color: #333;
-    position: relative;
-    float: left;
-    width:  90px;
+    width: 90px;
     height: 20px;
-    background-position: 50% 50%;
-    background-repeat:   no-repeat;
-    background-size:     cover;
     margin-right: 10px;
     margin-left: 10px;
-
-
 }
 
 .navbar {
     display: flex;
-    overflow-x: auto;
+    overflow-x: auto; /* Tillad vandret scroll */
+    white-space: nowrap; /* Tving alt indhold til at være på én linje */
     background-color: #f4f4f4;
     padding: 10px;
     border-radius: 20px;
@@ -73,8 +61,6 @@ body {
     height: 30px;
 }
 
-
-
 /* Midtersektion med knapper */
 .button-section {
     display: flex;
@@ -82,7 +68,7 @@ body {
     gap: 20px;
     justify-content: center;
     max-height: 400px;
-    overflow-y: auto;
+    overflow-y: auto; /* Tillad lodret scroll */
     padding: 20px;
     background-color: #fff387;
 }
@@ -95,16 +81,15 @@ body {
     transition: transform 0.2s ease;
     background-color: #fff387;
 }
+
 .button-item img {
-     width: 100%;
-     border-radius: 10px;
- }
+    width: 100%;
+    border-radius: 10px;
+}
 
 .button-item:hover {
     transform: scale(1.05);
 }
-
-
 
 /* Quiz styling */
 #question {
@@ -131,10 +116,8 @@ body {
     background-color: #bbb;
 }
 
-
-
 #next-btn {
-    display: none;
+    display: none; /* Skjul som standard */
     background-color: #f4a261;
     color: #fff;
     padding: 10px 20px;
@@ -157,18 +140,18 @@ body {
 }
 
 .correct {
-    background-color: #4caf50  !important; /* Lys grøn for korrekt svar */
+    background-color: #4caf50 !important; /* Lys grøn for korrekt svar */
     color: #000 !important;
 }
 
 .incorrect {
-    background-color: #f44336  !important; /* Lys rød for forkert svar */
-    color: #000!important;
+    background-color: #f44336 !important; /* Lys rød for forkert svar */
+    color: #000 !important;
 }
-/*progress bar style */
 
+/* Progress bar style */
 #progress-container {
-    display: none;
+    display: none; /* Skjul som standard */
     width: 100%;
     background-color: #f4f4f4;
     border-radius: 10px;
@@ -187,12 +170,49 @@ body {
     background-color: #4caf50; /* Grøn farve for at indikere fremskridt */
     transition: width 0.5s ease; /* Smooth overgang, når progressen øges */
 }
+/*Gå tilbage knappen*/
+#back-btn {
+    background-color: #008CBA; /* Blå farve */
+    color: #ffffff; /* Hvid tekst */
+    padding: 12px 24px;
+    border: none;
+    cursor: pointer;
+    border-radius: 25px; /* Rundede hjørner for at gøre knappen pænere */
+    font-size: 18px;
+    font-weight: bold;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Let skygge for dybdeeffekt */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Blød overgang */
+    margin-top: 20px; /* Tilføj lidt afstand til toppen */
+}
+
+#back-btn:hover {
+    background-color: #005f73; /* Mørkere blå ved hover */
+    transform: scale(1.05); /* Lidt større ved hover */
+}
+
+#back-btn:active {
+    transform: scale(0.95); /* Lidt mindre ved klik */
+}
+
+/* Tilføj en wrapper til knappen og centrer den */
+.back-btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px; /* Giver afstand fra feedback sektionen */
+}
 
 
+/* Timer styling */
+#timerCanvas {
+    display: none; /* Skjul som standard */
+    margin: 20px auto; /* Centrer canvas'en horisontalt og tilføj margin for plads */
+}
 
 /* Tablets (min-width: 768px) */
 @media (min-width: 768px) {
-    .home-container, .quiz-container {
+    .home-container,
+    .quiz-container {
         max-width: 600px;
         padding: 30px;
     }
@@ -203,13 +223,14 @@ body {
     }
 
     .button-item {
-        width: calc(33.33% - 20px); /* Display three elements side by side */
+        width: calc(33.33% - 20px); /* Display tre elementer side om side */
     }
 }
 
 /* Desktops (min-width: 1024px) */
 @media (min-width: 1024px) {
-    .home-container, .quiz-container {
+    .home-container,
+    .quiz-container {
         max-width: 800px;
         padding: 40px;
     }
@@ -224,7 +245,7 @@ body {
     }
 
     .button-item {
-        width: calc(25% - 20px); /* Display four elements side by side */
+        width: calc(25% - 20px); /* Display fire elementer side om side */
     }
 
     #question {
