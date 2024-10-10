@@ -218,26 +218,36 @@ body {
 
 .timer-circle {
     position: relative;
-    margin: 0 auto; /* Centrerer cirklen */
+    margin-top: 30px; /* Centrerer cirklen */
 }
 
 .timer-circle circle {
-    transition: stroke-dashoffset 1s linear; /* Glidende animation */
+    transition: stroke-dashoffset 0.5s ease; /* Glidende animation */
 }
 
 /* Styling for timer sektionen */
 #time-text {
     font-family: Arial, sans-serif;
+    font-weight: bold;
+    fill: #4caf50;
     pointer-events: none; /* Forhindrer klik på teksten */
-    font-size: 16px; /* Juster fontstørrelse efter behov */
+    font-size: 20px; /* Juster fontstørrelse efter behov */
     text-align: center; /* Centrer teksten i cirklen */
+    dominant-baseline: middle;
+    text-anchor: middle;
+
 }
 
 #time-change {
     font-family: Arial, sans-serif;
+    font-weight: bold;
     pointer-events: none; /* Forhindrer klik på teksten */
     color: #333; /* Standard farve */
-    font-size: 14px; /* Juster skrifttype efter behov */
+    font-size: 20px; /* Juster skrifttype efter behov */
+    text-align: center; /* Centrer teksten i cirklen */
+    dominant-baseline: middle;
+    text-anchor: middle;
+    fill: #4caf50;
 }
 
 
