@@ -105,9 +105,9 @@ body {
     transition: background-color 0.3s ease;
 }
 
-#options-container button:hover {
+/*#options-container button:hover {
     background-color: #bbb;
-}
+}*/
 
 #next-btn {
     display: none; /* Skjul som standard */
@@ -123,13 +123,14 @@ body {
 
 /* Styling for feedback sektionen */
 #feedback {
-    display: none; /* Skjul som standard */
     margin-top: 15px;
     font-size: 18px; /* Større tekst */
     font-weight: bold; /* Gør teksten fed */
     padding: 10px; /* Tilføj polstring */
     border-radius: 5px; /* Afrund hjørnerne */
+    display: inline-block; /* Så den kan have baggrund */
     transition: all 0.3s ease; /* Blød overgang */
+    display: none; /* Skjul som standard */
 }
 
 
@@ -147,6 +148,21 @@ body {
     color: #fff; /* Hvid tekst */
     box-shadow: 0 4px 10px rgba(244, 67, 54, 0.5); /* Skygge for dybde */
 }
+
+/* Korrekt svar stil */
+.correct {
+    background-color: #4caf50 !important; /* Lys grøn */
+    color: #fff !important; /* Hvid tekst */
+
+}
+
+/* Forkert svar stil */
+.incorrect {
+    background-color: #f44336 !important; /* Lys rød */
+    color: #fff !important; /* Hvid tekst */
+
+}
+
 
 /* Progress bar style */
 #progress-container {

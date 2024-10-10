@@ -168,13 +168,15 @@ function checkAnswer(selectedIndex, button) {
     const currentQuestion = questions[currentQuestionIndex];
     const buttons = document.getElementById('options-container').children;
     const feedbackElement = document.getElementById('feedback');
+    const timeChangeElement = document.getElementById('time-change'); // Hent det nye element til tidændringer
 
     // Vis feedback-sektionen
     feedbackElement.style.display = 'block'; // Sørg for feedback er synlig
 
-    // Reset feedback
+    // Nulstil feedback
     feedbackElement.classList.remove('correct-feedback', 'incorrect-feedback');
     feedbackElement.innerText = ''; // Tøm feedback
+    timeChangeElement.style.display = 'none'; // Skjul tidændringsbeskeden i starten
 
     // Kontrollér om svaret er korrekt
     if (selectedIndex === currentQuestion.correct) {
@@ -183,14 +185,31 @@ function checkAnswer(selectedIndex, button) {
         correctAnswersCount++; // Incrementer tælleren for rigtige svar
         timeLeft += 3; // Tilføj 3 sekunder ved korrekt svar
         timeChange += 3; // Opdater tidændring
-        feedbackElement.classList.add('correct-feedback'); // Tilføj korrekt feedback klasse
+
+        // Opdater tidændringsbesked
+        timeChangeElement.innerText = `+${3} sekunder tilføjet!`; // Vis tid tilføjet
+        timeChangeElement.style.color = '#4caf50'; // Grøn farve for tilføjet tid
+        timeChangeElement.style.display = 'block'; // Vis beskeden
+
+
+        // Tilføj grøn feedback baggrund
+        feedbackElement.classList.add('correct-feedback'); // Tilføj korrekt farveknap
+
     } else {
         button.classList.add('incorrect');
         buttons[currentQuestion.correct].classList.add('correct');
         feedbackElement.innerText = "Forkert! " + currentQuestion.feedback;
-        timeLeft -= 5; // Fjerne 5 sekunder ved forkert svar
+        timeLeft -= 5; // Træk 5 sekunder ved forkert svar
         timeChange -= 5; // Opdater tidændring
-        feedbackElement.classList.add('incorrect-feedback'); // Tilføj forkert feedback klasse
+
+        // Opdater tidændringsbesked
+        timeChangeElement.innerText = `${5} sekunder trukket!`; // Vis tid trukket
+        timeChangeElement.style.color = '#f44336'; // Rød farve for trukket tid
+        timeChangeElement.style.display = 'block'; // Vis beskeden
+
+
+        // Tilføj rød feedback baggrund
+        feedbackElement.classList.add('incorrect-feedback'); // Tilføj forkertfarve knap
     }
 
     // Deaktiver knapper for at forhindre flere klik
@@ -213,6 +232,7 @@ function nextQuestion() {
         showQuestion();
         document.getElementById('next-btn').style.display = 'none';
         document.getElementById('feedback').style.display = 'none'; // Skjul feedback
+        document.getElementById('time-change').style.display = 'none';
         startTimer(); // Timeren fortsætter fra den tid, den var på.
     } else {
         showCompletion();
