@@ -4,52 +4,110 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/stylesheet.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <title>Zealand Studiestarts Web App</title>
 </head>
 <body>
 <!-- Forside -->
 <div class="home-container active" id="home-container">
     <div class="header">
-
         <a href="#"><img src="images/logo/ZealandLogoMoodle.png" alt="Zealand" class="logo"></a>
 
         <div class="navbar">
+
             <a class="nav-item" href="#">
-                <img src="images/icons/book.png" alt="Book">
+                <i class="fa-solid fa-m"></i>
             </a>
             <a class="nav-item" href="#">
-                <img src="images/icons/moodle.png" alt="Moodle">
+                <i class="fa-regular fa-calendar-days"></i>
             </a>
             <a class="nav-item" href="#">
-                <img src="images/icons/calendar.png" alt="Calendar">
+                <i class="fa-solid fa-w"></i>
             </a>
             <a class="nav-item" href="#">
-                <img src="images/icons/wiseflow.png" alt="Tools">
+                <i class="fa-solid fa-id-card"></i>
             </a>
             <a class="nav-item" href="#">
-                <img src="images/icons/studiekort.png" alt="Tools">
+                <i class="fa-solid fa-champagne-glasses"></i>
             </a>
             <a class="nav-item" href="#">
-                <img src="images/icons/fredagsbar.png" alt="Tools">
+                <i class="fa-solid fa-burger"></i>
             </a>
             <a class="nav-item" href="#">
-                <img src="images/icons/canteen.png" alt="Tools">
+                <i class="fa-solid fa-newspaper"></i>
             </a>
             <a class="nav-item" href="#">
-                <img src="images/icons/megaphone_596092.png" alt="Tools">
+                <i class="fas fa-user"></i>
             </a>
-            <a class="nav-item" href="#">
-                <img src="images/icons/settings.png" alt="Tools">
-            </a>
+
         </div>
 
     </div>
+
     <div class="button-section">
         <div class="button-item" onclick="startQuiz()">
-            <img src="images/thumbnails/quiz-thumbnail.png" alt="Quiz Thumbnail">
+            <img src="images/icons/quiz.svg" alt="Quiz Thumbnail">
         </div>
+
+        <div class="button-item">
+            <a href="pages/skema.html">
+                <img src="images/icons/skema.svg" alt="Skema">
+            </a>
+        </div>
+
+        <div class="button-item">
+            <a href="pages/wiseflow.html">
+                <img src="images/icons/wiseflowE.svg" alt="Wiseflow">
+            </a>
+        </div>
+
+        <div class="button-item">
+            <a href="pages/moodle.html">
+                <img src="images/icons/moodle.svg" alt="Moodle">
+            </a>
+        </div>
+
+        <div class="button-item">
+            <a href="pages/minerum.html">
+                <img src="images/icons/minerum.svg" alt="Mine Rum">
+            </a>
+        </div>
+
+        <!-- Link til Fredagsbar -->
+        <div class="button-item">
+            <a href="pages/fredagsbar.html">
+                <img src="images/icons/fredagsbar.svg" alt="Fredagsbar">
+            </a>
+        </div>
+
+        <!-- Link til Kantine -->
+        <div class="button-item">
+            <a href="pages/kantine.html">
+                <img src="images/icons/kantine.svg" alt="Kantine">
+            </a>
+        </div>
+
+        <div class="button-item">
+            <a href="pages/parkering.html">
+                <img src="images/icons/parkering.svg" alt="Parkering">
+            </a>
+        </div>
+
+        <div class="button-item">
+            <a href="pages/nyheder.html">
+                <img src="images/icons/nyheder.svg" alt="Nyheder">
+            </a>
+        </div>
+
+
+
+
     </div>
+
+
 </div>
+
+
 
 <!-- Quiz Container -->
 <div class="quiz-container" id="quiz-container" style="display: none;">

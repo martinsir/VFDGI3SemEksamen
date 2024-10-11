@@ -1,21 +1,27 @@
+* {
+    box-sizing: border-box;
+}
+
 /* Mobile-first styles (default) */
-body {
+html, body {
     background-color: #fff387;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    /*display: flex;
+    align-items: center;        edit efter behov
+    justify-content: center;*/
     min-height: 100vh;
     margin: 0;
+    overflow-x: hidden;
+
+
 }
 
 /* Container styling */
 .home-container,
 .quiz-container {
     width: 100%;
-    max-width: 450px;
-    background-color: #ffffff;
-    border-radius: 10px;
+   /* max-width: 430px;*/
+    background-image: linear-gradient(#cccccc, #fff387);
     padding: 20px;
     text-align: center;
     display: none; /* Skjul dem som standard */
@@ -40,19 +46,60 @@ body {
     margin: 0 10px; /* Ens margin for bedre layout */
 }
 
+
+
 .navbar {
     display: flex;
     overflow-x: auto;
-    background-color: #f4f4f4;
+    background-color: #f1eeee;
     padding: 10px;
     border-radius: 20px;
-    gap: 15px;
+    gap: 25px;
+    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.1);
 }
 
-.nav-item img {
+.nav-item i {
     width: 30px;
     height: 30px;
+    transition: transform 0.2s ease, background-color 0.3s ease;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    align-content: center;
+
 }
+
+
+.nav-item:active i {
+    transform: scale(1.1); /* Lille forstørrelse ved tryk */
+    background-color: rgba(0, 0, 0, 0.1); /* Let baggrundseffekt ved tap */
+    border-radius: 50%; /* Rund baggrundseffekt */
+}
+.nav-item.active i {
+    background-color: #fff387; /* Giv et visuelt cue for aktivt element */
+}
+
+
+.navbar-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 100vw;
+    overflow: hidden;
+}
+
+.navbar {
+    display: flex;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding: 10px;
+}
+
+.navbar::-webkit-scrollbar {
+    display: none; /* Skjul scrollbar */
+}
+
+
 
 /* Midtersektion med knapper */
 .button-section {
@@ -64,6 +111,7 @@ body {
     overflow-y: auto;
     padding: 20px;
     background-color: #fff387;
+    border-radius: 20px;
 }
 
 .button-item {
@@ -180,6 +228,9 @@ body {
     background-color: #4caf50; /* Grøn farve for at indikere fremskridt */
     transition: width 0.5s ease; /* Smooth overgang, når progressen øges */
 }
+
+
+
 
 @keyframes rotate {
     0% {
