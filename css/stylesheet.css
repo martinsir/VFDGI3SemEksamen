@@ -46,16 +46,29 @@ html, body {
     margin: 0 10px; /* Ens margin for bedre layout */
 }
 
+/*      titel på nav*/
+
+.navContainerTitle {
+    font-size: 10px;
+    color: #999;
+    text-align: center;
+    margin: 5px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 300;
+}
+
 
 
 .navbar {
     display: flex;
     overflow-x: auto;
-    background-color: #f1eeee;
+    background-color: #fff387;
     padding: 10px;
     border-radius: 20px;
-    gap: 25px;
-    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.1);
+    opacity: 50%;
+
 }
 
 .nav-item i {
@@ -65,9 +78,11 @@ html, body {
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
     border-radius: 15px;
     align-content: center;
-
+    margin-right: 30px;
 }
-
+.nav-item:last-child i {
+    margin-right: 0; /* Fjerne den sidste margin rettelse */
+}
 
 .nav-item:active i {
     transform: scale(1.1); /* Lille forstørrelse ved tryk */
@@ -117,7 +132,7 @@ html, body {
 .button-item {
     width: calc(50% - 15px);
     border-radius: 10px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     cursor: pointer;
     transition: transform 0.2s ease;
     background-color: #fff387;
@@ -132,7 +147,29 @@ html, body {
     transform: scale(1.05);
 }
 
+
 /* Quiz styling */
+
+.button-container {
+    display: block;
+    justify-content: right; /* Placerer knapperne til højre */
+    gap: 10px; /* Mellemrum mellem knapper */
+}
+
+#next-btn,
+#home-btn {
+    display: block; /* Sørger for, at den vises på en ny linje */
+    background-color: #f4a261;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 18px;
+    margin-top: 20px;
+    margin-left: auto; /* For at placere den til højre */
+    margin-right: 0;   /* Tilpasning til højre */
+}
 #question {
     margin-bottom: 20px;
     font-size: 18px;
@@ -153,21 +190,6 @@ html, body {
     transition: background-color 0.3s ease;
 }
 
-/*#options-container button:hover {
-    background-color: #bbb;
-}*/
-
-#next-btn {
-    display: none; /* Skjul som standard */
-    background-color: #f4a261;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-    font-size: 18px;
-    margin-top: 20px;
-}
 
 /* Styling for feedback sektionen */
 #feedback {
@@ -176,7 +198,6 @@ html, body {
     font-weight: bold; /* Gør teksten fed */
     padding: 10px; /* Tilføj polstring */
     border-radius: 5px; /* Afrund hjørnerne */
-    display: inline-block; /* Så den kan have baggrund */
     transition: all 0.3s ease; /* Blød overgang */
     display: none; /* Skjul som standard */
 }
@@ -223,7 +244,7 @@ html, body {
 }
 
 #progress-bar {
-    width: 0%;
+    width: 0;
     height: 100%;
     background-color: #4caf50; /* Grøn farve for at indikere fremskridt */
     transition: width 0.5s ease; /* Smooth overgang, når progressen øges */
@@ -263,17 +284,32 @@ html, body {
 /* Styling for timer */
 #time-text {
     font-family: Arial, sans-serif; /* Vælg en passende skrifttype */
-    pointer-events: none; /* Forhindrer klik på teksten */
-    font-size: 16px; /* Juster størrelsen, hvis nødvendigt */
+    pointer-events: none;
+    font-size: 20px;
+    fill: #4caf50;
 }
 
 .timer-circle {
     position: relative;
     margin-top: 30px; /* Centrerer cirklen */
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    pointer-events: none; /* Forhindrer klik på teksten */
+    font-size: 20px; /* Juster fontstørrelse efter behov */
+    text-align: center; /* Centrer teksten i cirklen */
+    dominant-baseline: middle;
+    text-anchor: middle;
 }
 
 .timer-circle circle {
     transition: stroke-dashoffset 0.5s ease; /* Glidende animation */
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    pointer-events: none; /* Forhindrer klik på teksten */
+    font-size: 20px; /* Juster fontstørrelse efter behov */
+    text-align: center; /* Centrer teksten i cirklen */
+    dominant-baseline: middle;
+    text-anchor: middle;
 }
 
 /* Styling for timer sektionen */
@@ -293,12 +329,12 @@ html, body {
     font-family: Arial, sans-serif;
     font-weight: bold;
     pointer-events: none; /* Forhindrer klik på teksten */
-    color: #333; /* Standard farve */
     font-size: 20px; /* Juster skrifttype efter behov */
     text-align: center; /* Centrer teksten i cirklen */
     dominant-baseline: middle;
     text-anchor: middle;
     fill: #4caf50;
+    color: #fff;
 }
 
 

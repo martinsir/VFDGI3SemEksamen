@@ -1,0 +1,92 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+header {
+    background-color: #007bff;
+    color: white;
+    text-align: center;
+    padding: 1rem 0;
+}
+
+main {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 2rem;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.task-form {
+    display: flex;
+    flex-wrap: wrap; /* This allows it to wrap on smaller screens */
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.task-form input,
+.task-form select,
+.task-form button {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    flex-grow: 1;
+}
+
+.task-form button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.task-list {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+}
+
+.task {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.task-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.task button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    padding: 5px 10px;
+    margin-left: 5px; /* Add space between buttons */
+}
+
+.task .remove-task {
+    background-color: #dc3545; /* Red color for remove button */
+}
+
+.task button i {
+    margin-right: 5px; /* Space between icon and text */
+}
+
+.task button[disabled] {
+    background-color: #ccc;
+}
+
+
