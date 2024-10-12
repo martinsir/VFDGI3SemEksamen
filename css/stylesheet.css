@@ -70,7 +70,9 @@ html, body {
     opacity: 50%;
 
 }
-
+.nav-item{
+    color: #000;
+}
 .nav-item i {
     width: 30px;
     height: 30px;
