@@ -14,46 +14,53 @@
 
     <div class="header">
         <a href="#"><img src="images/logo/ZealandLogoMoodle.png" alt="Zealand" class="logo"></a>
-        <p class="navContainerTitle">Moodle Links</p> <!--   container titles    -->
-        <div class="navbar">
-            <a class="nav-item" href="https://moodle.zealand.dk/login/" target="_blank">
-                <i class="fa-solid fa-m"></i>
-            </a>
-            <a class="nav-item" href="https://cloud.timeedit.net/zealand/web/timeedit/sso/zealand_sso?back=https%3A%2F%2Fcloud.timeedit.net%2Fzealand%2Fweb%2F3%2F" target="_blank">
-                <i class="fa-regular fa-calendar-days"></i>
-            </a>
-            <a class="nav-item" href="https://europe.wiseflow.net/login/license/85" target="_blank">
-                <i class="fa-solid fa-w"></i>
-            </a>
-            <a class="nav-item" href="https://studentid.zealand.dk/" target="_blank">
-                <i class="fa-solid fa-id-card"></i>
-            </a>
-            <a class="nav-item" href="pages/fredagsbar.html" target="_blank">
-                <i class="fa-solid fa-champagne-glasses"></i>
-            </a>
-            <a class="nav-item" href="https://office.zealand.dk/" target="_blank">
-                <i class="fa-solid fa-box-open"></i>
-            </a>
-            <a class="nav-item" href="https://moodle.zealand.dk/blocks/praxis_cohort_news/view.php?courseid=1&page=archive" target="_blank">
-                <i class="fa-solid fa-newspaper"></i>
-            </a>
-            <a class="nav-item" href="https://moodle.zealand.dk/user/files.php" target="_blank">
-                <i class="fa-solid fa-print"></i>
-            </a>
-            <a class="nav-item" href="https://moodle.zealand.dk/user/preferences.php" target="_blank">
-                <i class="fas fa-user"></i>
-            </a>
-        </div>
+        <p class="navContainerTitle">Moodle Links</p>
 
-        <!-- Swipe indicator added here -->
-        <div class="navbar-indicator">
-            <div class="indicator-pill"></div>
-        </div>
+        <!-- Navbar container med swipe-pile og indikator -->
+        <div class="navbar-container">
+            <!-- Venstre pil -->
+            <div class="left-arrow"></div>
+            <div class="navbar">
+                <a class="nav-item" href="https://moodle.zealand.dk/login/" target="_blank">
+                    <i class="fa-solid fa-m"></i>
+                </a>
+                <a class="nav-item" href="https://cloud.timeedit.net/zealand/web/timeedit/sso/zealand_sso?back=https%3A%2F%2Fcloud.timeedit.net%2Fzealand%2Fweb%2F3%2F" target="_blank">
+                    <i class="fa-regular fa-calendar-days"></i>
+                </a>
+                <a class="nav-item" href="https://europe.wiseflow.net/login/license/85" target="_blank">
+                    <i class="fa-solid fa-w"></i>
+                </a>
+                <a class="nav-item" href="https://studentid.zealand.dk/" target="_blank">
+                    <i class="fa-solid fa-id-card"></i>
+                </a>
+                <a class="nav-item" href="pages/fredagsbar.html" target="_blank">
+                    <i class="fa-solid fa-champagne-glasses"></i>
+                </a>
+                <a class="nav-item" href="https://office.zealand.dk/" target="_blank">
+                    <i class="fa-solid fa-box-open"></i>
+                </a>
+                <a class="nav-item" href="https://moodle.zealand.dk/blocks/praxis_cohort_news/view.php?courseid=1&page=archive" target="_blank">
+                    <i class="fa-solid fa-newspaper"></i>
+                </a>
+                <a class="nav-item" href="https://moodle.zealand.dk/user/files.php" target="_blank">
+                    <i class="fa-solid fa-print"></i>
+                </a>
+                <a class="nav-item" href="https://moodle.zealand.dk/user/preferences.php" target="_blank">
+                    <i class="fas fa-user"></i>
+                </a>
+            </div>
 
+            <!-- Swipe-indikatorer -->
+            <div class="indicators">
+                <span class="indicator"></span>
+                <span class="indicator"></span>
+                <span class="indicator"></span>
+            </div>
+        </div>
     </div>
 
     <div class="button-section">
-        <div class="button-item" id="start-quiz" >
+        <div class="button-item" id="start-quiz">
             <img src="images/icons/quiz.png" alt="Quiz">
         </div>
         <div class="button-item">
@@ -109,9 +116,10 @@
     <div id="feedback" style="display: none;"></div>
     <div class="button-container">
         <button id="next-btn" onclick="nextQuestion()">Næste</button>
-        <div id="result"></div> <!-- Resultattavle -->
+        <div id="result"></div>
         <button id="home-btn" onclick="goToHome()">Tilbage til forsiden</button>
     </div>
+
     <!-- Timer sektionen -->
     <div id="timer">
         <span id="time-left"></span>
