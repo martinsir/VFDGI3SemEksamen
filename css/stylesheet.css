@@ -12,7 +12,6 @@ html, body {
 }
 
 /* Container styling */
-.home-container,
 .quiz-container {
     width: 100%;
     background-image: linear-gradient(#cccccc, #fff387);
@@ -21,10 +20,23 @@ html, body {
     display: none;
 }
 
-.home-container.active,
 .quiz-container.active {
     display: block;
 }
+
+.home-container{
+    width: auto; /* Prøv at sætte til auto for at give plads */
+    background-image: linear-gradient(#cccccc, #fff387);
+    padding: 20px;
+    text-align: center;
+    display: none;
+}
+
+.home-container.active{
+    display: block;
+}
+
+
 
 /* Header with logo and navigation */
 .header {
@@ -52,28 +64,29 @@ html, body {
 
 /* Navbar styling */
 .navbar-container {
-    position: relative; /* Tilføjet for at placere pilen i forhold til navbaren */
     display: flex;
-    align-items: center;
-    justify-content: center;
-    max-width: 100vw;
-    overflow: hidden;
-    padding: 10px;
+    justify-content: flex-end; /* Start navbaren helt til højre */
+    width: 100%; /* Fylder hele skærmens bredde */
+    position: relative;
+    overflow-x: hidden; /* Skjul overskydende indhold */
 }
 
 .navbar {
-    display: flex;
-    overflow-x: auto;
-    background-color: #fff387;
+    display: flex; /* Fleksibel placering af indhold */
+    overflow-x: auto; /* Tillad vandret scrolling */
     padding: 10px;
-    border-radius: 20px;
+    border-radius: 20px 0 0 20px; /* Rund kant kun i venstre side */
     box-shadow: 0 6px 8px rgba(0, 0, 0, 0.1);
-    opacity: 0.5;
+    opacity: 0.9;
     white-space: nowrap;
     scroll-behavior: smooth;
+    width: auto; /* Justeret til auto for at tilpasse indholdets bredde */
+    margin-left: auto; /* Skubber hele navbaren til højre */
+    background: linear-gradient(to left, rgba(255, 243, 135, 0) .51%, rgba(255, 243, 135, 1)); /* Transparens fra højre */
 }
 
 .nav-item {
+    width: 100%;
     color: #000;
     margin-right: 10px;
     transition: transform 0.2s ease, background-color 0.3s ease;
@@ -110,7 +123,7 @@ html, body {
 .left-arrow {
     position: absolute;
     top: 50%;
-    left: 10px;
+    left: 1px;
     width: 15px;
     height: 15px;
     background-image: url('../images/icons/left-arrow.svg');
@@ -119,8 +132,8 @@ html, body {
     background-position: center;
     transform: translateY(-50%);
     z-index: 30;
-    opacity: 1;
-    transition: opacity 0.5s ease;
+    opacity: 60%;
+    transition: opacity 3s ease-in-out;
 
 }
 .navbar-container.hide-left .left-arrow {
@@ -187,8 +200,8 @@ html, body {
 /* Quiz button styling */
 .button-container {
     display: block;
-    justify-content: right;
-    gap: 10px;
+    justify-content: center;
+    align-content: center;
 }
 
 #next-btn, #home-btn {
@@ -208,6 +221,29 @@ html, body {
     margin-bottom: 20px;
     font-size: 18px;
 }
+#options-container {
+    display: flex;
+    flex-direction: column; /* Stack buttons vertically */
+    align-items: center; /* Center buttons horizontally */
+    justify-content: center; /* Ensure buttons are centered in the container */
+    width: 100%; /* Make sure the container spans the full width */
+    padding: 10px;
+    box-sizing: border-box; /* Include padding in width */
+}
+
+#options-container button {
+    width: 100%; /* Ensure buttons take up full width of their container */
+    max-width: 400px; /* Optional: Set a max width for buttons to prevent them from being too wide */
+    margin: 10px 0; /* Add some vertical margin between buttons */
+    padding: 15px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    background-color: #ccc;
+    color: #000;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
 
 #options-container button {
     display: block;
@@ -222,4 +258,145 @@ html, body {
     cursor: pointer;
     border-radius: 5px;
     transition: background-color 0.3s ease;
+    align-content: center;
 }
+
+/* General styling for the quiz container */
+.quiz-container {
+    width: 100%;
+    padding: 20px;
+    text-align: center;
+    display: none;
+    background-color: #fff387; /* Adjust to your theme */
+}
+
+#question {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #fff387;
+    background-color: #000000; /* Adjust to your theme */
+    border-radius: 15px 15px 0 0 ;
+    padding: 10px;
+}
+
+#options-container button {
+    background-color: #f4a261;
+    color: white;
+    border: none;
+    padding: 15px;
+    margin: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+}
+
+#options-container button:hover {
+    background-color: #e76f51;
+}
+
+#options-container button.correct {
+    background-color: #2a9d8f;
+}
+
+#options-container button.incorrect {
+    background-color: #e63946;
+}
+
+#next-btn {
+    background-color: #264653;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+#next-btn:hover {
+    background-color: #2a9d8f;
+}
+
+/* Timer styling */
+#timer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.timer-circle {
+    position: relative;
+}
+
+#time-left {
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.timer-circle text {
+    font-family: Arial, sans-serif;
+    font-size: 24px;
+    fill: #000;
+}
+
+#time-change {
+    font-size: 18px;
+    color: #333;
+    margin-top: 10px;
+}
+
+
+/* Progress bar styling */
+#progress-container {
+    background-color: #ccc;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+#progress-bar {
+    height: 10px;
+    background-color: #2a9d8f;
+    transition: width 0.3s ease;
+}
+
+/* Feedback styling */
+#feedback {
+    border-radius: 20px;
+    padding: 20px;
+    margin-top: 10px;
+    text-align: center;  /* Center the feedback text */
+    width: 100%; /* Ensure the feedback spans the full width */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Feedback when correct */
+.correct-feedback {
+    background-color: green;
+    color: #fff; /* White text for better contrast */
+    font-weight: bold;
+    font-size: 16px;
+}
+
+/* Feedback when incorrect */
+.incorrect-feedback {
+    background-color: red;
+    color: #fff; /* White text for better contrast */
+    font-weight: bold;
+    font-size: 16px;
+}
+
+
+/* Result section */
+#result {
+    font-size: 24px;
+    color: #264653;
+    margin-top: 20px;
+}
+
