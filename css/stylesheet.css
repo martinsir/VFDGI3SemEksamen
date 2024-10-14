@@ -121,22 +121,13 @@ html, body {
     z-index: 30;
     opacity: 1;
     transition: opacity 0.5s ease;
-    animation: blinkArrow 0.8s ease-in-out 3; /* Blink venstre pil */
+
 }
-
-
-@keyframes blinkArrow {
-    0%, 100% {
-        opacity: 1;
-    }
-    50% {
-        opacity: 0;
-    }
-}
-
 .navbar-container.hide-left .left-arrow {
     display: none;
 }
+
+
 
 /* Button section styling */
 .button-section {
