@@ -1,94 +1,96 @@
-// Quiz spørgsmål
-const questions = [
-    {
-        question: "Hvad bruges Moodle hovedsageligt til som studerende på Zealand?",
-        options: [
-            "At se videoindhold fra tidligere forelæsninger",
-            "At få adgang til kursusmaterialer, opgaver og meddelelser",
-            "At booke kantinepladser",
-            "At finde studieboliger"
-        ],
-        correct: 1,
-        feedback: "Moodle er dit primære værktøj til at holde styr på dine kurser, deadlines og kommunikation med undervisere."
-    },
-    {
-        question: "Hvilken opgave kan du løse ved hjælp af Wiseflow?",
-        options: [
-            "Aflevere opgaver og eksaminer",
-            "Bestille bøger fra biblioteket",
-            "Se forelæsningsvideoer",
-            "Finde din skema"
-        ],
-        correct: 0,
-        feedback: "Wiseflow er platformen, hvor du indleverer dine opgaver og eksaminer. Husk at tjekke deadlines i god tid!"
-    },
-    {
-        question: "Hvordan tjekker du dit skema for undervisning og forelæsninger?",
-        options: [
-            "Du modtager en mail hver uge med dit opdaterede skema",
-            "Du skal logge ind på Zealand's skemasystem",
-            "Dit skema hænger altid på skolens opslagstavle",
-            "Du skal spørge din underviser efter hver time"
-        ],
-        correct: 1,
-        feedback: "Du kan til enhver tid logge ind på skemasystemet for at se dine lektioner og ændringer i dit skema."
-    },
-    {
-        question: "Hvornår afholdes den officielle fredagsbar på campus?",
-        options: [
-            "Hver dag efter kl. 16",
-            "Den sidste fredag i måneden",
-            "Hver fredag efter kl. 15",
-            "Den første torsdag i måneden"
-        ],
-        correct: 2,
-        feedback: "Fredagsbaren er det perfekte sted at mødes med dine medstuderende og afslutte ugen på en sjov måde!"
-    },
-    {
-        question: "Hvilken mulighed tilbyder kantinen på Zealand?",
-        options: [
-            "Kun kolde retter",
-            "Både varme og kolde retter samt salater",
-            "Kun kaffe og snacks",
-            "Ingen kantine på campus"
-        ],
-        correct: 1,
-        feedback: "Kantinen tilbyder et bredt udvalg af mad, så du altid kan finde noget, der passer til din smag."
-    },
-    {
-        question: "Skal du bruge en parkeringstilladelse for at parkere på Zealand's campus?",
-        options: [
-            "Ja, du skal hente den fra administrationen",
-            "Nej, parkering er gratis for alle",
-            "Ja, men den er digital og registreres via nummerplade",
-            "Du må kun parkere i weekenden"
-        ],
-        correct: 2,
-        feedback: "Husk at registrere din bil via systemet, så du undgår at få en bøde."
-    },
-    {
-        question: "Kan du tage quizzer på Moodle for at teste din viden om kursusmaterialet?",
-        options: [
-            "Ja, visse undervisere bruger quizzer som en del af undervisningen",
-            "Nej, quizzer findes kun i fysiske test",
-            "Ja, men kun i eksamensperioden",
-            "Nej, Moodle bruges kun til læsematerialer"
-        ],
-        correct: 0,
-        feedback: "Moodle tilbyder quizfunktioner, som dine undervisere kan bruge til at hjælpe dig med at forstå kursusmaterialet."
-    },
-    {
-        question: "Hvordan får du adgang til dit kursusmateriale på Moodle?",
-        options: [
-            "Du får det tilsendt via mail",
-            "Du skal logge ind på Moodle og navigere til dit kursus",
-            "Du downloader materialet fra skolens hjemmeside",
-            "Materialet bliver lagt i klassens Facebook-gruppe"
-        ],
-        correct: 1,
-        feedback: "Alt dit kursusmateriale bliver lagt op på Moodle, så du har adgang til det døgnet rundt."
-    }
-];
+// Quiz spørgsmål (defineret én gang globalt)
+if (typeof questions === 'undefined') {
+    var questions = [
+        {
+            question: "Hvad bruges Moodle hovedsageligt til som studerende på Zealand?",
+            options: [
+                "At se videoindhold fra tidligere forelæsninger",
+                "At få adgang til kursusmaterialer, opgaver og meddelelser",
+                "At booke kantinepladser",
+                "At finde studieboliger"
+            ],
+            correct: 1,
+            feedback: "Moodle er dit primære værktøj til at holde styr på dine kurser, deadlines og kommunikation med undervisere."
+        },
+        {
+            question: "Hvilken opgave kan du løse ved hjælp af Wiseflow?",
+            options: [
+                "Aflevere opgaver og eksaminer",
+                "Bestille bøger fra biblioteket",
+                "Se forelæsningsvideoer",
+                "Finde din skema"
+            ],
+            correct: 0,
+            feedback: "Wiseflow er platformen, hvor du indleverer dine opgaver og eksaminer. Husk at tjekke deadlines i god tid!"
+        },
+        {
+            question: "Hvordan tjekker du dit skema for undervisning og forelæsninger?",
+            options: [
+                "Du modtager en mail hver uge med dit opdaterede skema",
+                "Du skal logge ind på Zealand's skemasystem",
+                "Dit skema hænger altid på skolens opslagstavle",
+                "Du skal spørge din underviser efter hver time"
+            ],
+            correct: 1,
+            feedback: "Du kan til enhver tid logge ind på skemasystemet for at se dine lektioner og ændringer i dit skema."
+        },
+        {
+            question: "Hvornår afholdes den officielle fredagsbar på campus?",
+            options: [
+                "Hver dag efter kl. 16",
+                "Den sidste fredag i måneden",
+                "Hver fredag efter kl. 15",
+                "Den første torsdag i måneden"
+            ],
+            correct: 2,
+            feedback: "Fredagsbaren er det perfekte sted at mødes med dine medstuderende og afslutte ugen på en sjov måde!"
+        },
+        {
+            question: "Hvilken mulighed tilbyder kantinen på Zealand?",
+            options: [
+                "Kun kolde retter",
+                "Både varme og kolde retter samt salater",
+                "Kun kaffe og snacks",
+                "Ingen kantine på campus"
+            ],
+            correct: 1,
+            feedback: "Kantinen tilbyder et bredt udvalg af mad, så du altid kan finde noget, der passer til din smag."
+        },
+        {
+            question: "Skal du bruge en parkeringstilladelse for at parkere på Zealand's campus?",
+            options: [
+                "Ja, du skal hente den fra administrationen",
+                "Nej, parkering er gratis for alle",
+                "Ja, men den er digital og registreres via nummerplade",
+                "Du må kun parkere i weekenden"
+            ],
+            correct: 2,
+            feedback: "Husk at registrere din bil via systemet, så du undgår at få en bøde."
+        },
+        {
+            question: "Kan du tage quizzer på Moodle for at teste din viden om kursusmaterialet?",
+            options: [
+                "Ja, visse undervisere bruger quizzer som en del af undervisningen",
+                "Nej, quizzer findes kun i fysiske test",
+                "Ja, men kun i eksamensperioden",
+                "Nej, Moodle bruges kun til læsematerialer"
+            ],
+            correct: 0,
+            feedback: "Moodle tilbyder quizfunktioner, som dine undervisere kan bruge til at hjælpe dig med at forstå kursusmaterialet."
+        },
+        {
+            question: "Hvordan får du adgang til dit kursusmateriale på Moodle?",
+            options: [
+                "Du får det tilsendt via mail",
+                "Du skal logge ind på Moodle og navigere til dit kursus",
+                "Du downloader materialet fra skolens hjemmeside",
+                "Materialet bliver lagt i klassens Facebook-gruppe"
+            ],
+            correct: 1,
+            feedback: "Alt dit kursusmateriale bliver lagt op på Moodle, så du har adgang til det døgnet rundt."
+        }
+    ];
+}
 
 let currentQuestionIndex = 0;
 let timeLeft = 30; // Starttid for nedtælling
@@ -96,13 +98,25 @@ let countdown;
 let correctAnswersCount = 0; // Tæller for rigtige svar
 let timeChange = 0; // Variabel til at holde styr på tidsændringen
 
+// Funktion til at nulstille quizzen
+function resetQuiz() {
+    currentQuestionIndex = 0;
+    correctAnswersCount = 0;
+    timeLeft = 30;
+    clearInterval(countdown); // Stop tidligere timer, hvis en er i gang
+    document.getElementById('quiz-container').style.display = 'none';
+    document.getElementById('home-container').classList.add('active'); // Vis forsiden igen
+}
+
 // Start quizzen
 function startQuiz() {
+    resetQuiz(); // Nulstil quiz, før du starter en ny runde
     document.getElementById('home-container').classList.remove('active');
     document.getElementById('quiz-container').style.display = 'block'; // Vis quiz-container
     document.getElementById('progress-container').style.display = 'block'; // Vis progress bar
     document.getElementById('result').style.display = 'none'; // Skjul resultattavlen
     document.getElementById('home-btn').style.display = 'none'; // Skjul knappen til forsiden
+    document.getElementById('next-btn').style.display = 'none'; // Skjul Næste knap ved start
     startTimer(); // Start timeren
     showQuestion(); // Vis det første spørgsmål
     timeChange = 0; // Reset timeChange til 0
@@ -116,12 +130,10 @@ function startTimer() {
     timerCircle.setAttribute('stroke-dasharray', circumference);
     timerCircle.setAttribute('stroke-dashoffset', circumference); // Start med fuld cirkel
 
-   // document.getElementById('time-left').textContent = timeLeft; // Vis tid
     document.getElementById('time-text').textContent = timeLeft; // Vis initial tid i cirklen
 
     countdown = setInterval(() => {
         timeLeft--;
-        //document.getElementById('time-left').textContent = timeLeft; // Opdater tid
         document.getElementById('time-text').textContent = timeLeft; // Opdater teksten i cirklen
 
         const offset = circumference - (timeLeft / 30) * circumference; // Beregn ny offset baseret på den tilbageværende tid
@@ -146,6 +158,7 @@ function showQuestion() {
     // Opdater spørgsmål og feedback
     questionElement.innerText = currentQuestion.question;
     feedbackElement.innerText = '';
+    document.getElementById('next-btn').style.display = 'none'; // Skjul Næste knap indtil spørgsmålet er besvaret
 
     // Opdater progress bar
     const progressPercentage = ((currentQuestionIndex + 1) / questions.length) * 100;
@@ -191,7 +204,6 @@ function checkAnswer(selectedIndex, button) {
         timeChangeElement.style.color = '#4caf50'; // Grøn farve for tilføjet tid
         timeChangeElement.style.display = 'block'; // Vis beskeden
 
-
         // Tilføj grøn feedback baggrund
         feedbackElement.classList.add('correct-feedback'); // Tilføj korrekt farveknap
 
@@ -207,7 +219,6 @@ function checkAnswer(selectedIndex, button) {
         timeChangeElement.style.color = '#f44336'; // Rød farve for trukket tid
         timeChangeElement.style.display = 'block'; // Vis beskeden
 
-
         // Tilføj rød feedback baggrund
         feedbackElement.classList.add('incorrect-feedback'); // Tilføj forkertfarve knap
     }
@@ -222,15 +233,11 @@ function checkAnswer(selectedIndex, button) {
     document.getElementById('next-btn').style.display = 'block';
 }
 
-
-
-
 // Gå til næste spørgsmål
 function nextQuestion() {
     currentQuestionIndex++;
-    if (currentQuestionIndex < questions.length ) {
+    if (currentQuestionIndex < questions.length) {
         showQuestion();
-        document.getElementById('next-btn').style.display = 'none';
         document.getElementById('feedback').style.display = 'none'; // Skjul feedback
         document.getElementById('time-change').style.display = 'none';
         startTimer(); // Timeren fortsætter fra den tid, den var på.
@@ -238,7 +245,6 @@ function nextQuestion() {
         showCompletion();
     }
 }
-
 
 // Vis resultattavle
 function showCompletion() {
@@ -260,27 +266,5 @@ function showCompletion() {
 
 // Gå tilbage til forsiden
 function goToHome() {
-    document.getElementById('quiz-container').style.display = 'none'; // Skjul quiz-container
-    document.getElementById('home-container').classList.add('active'); // Vis forsiden
-    currentQuestionIndex = 0; // Reset spørgsmål index
-    correctAnswersCount = 0; // Reset tæller for rigtige svar
-    timeLeft = 30; // Reset timeren
-    clearInterval(countdown); // Stop timeren, hvis den kører
-
-    // Skjul knappen "Tilbage til Forside" igen
-    document.getElementById('home-btn').style.display = 'none';
+    resetQuiz();
 }
-
-// Billede-section
-document.addEventListener("DOMContentLoaded", function () {
-    const elements = document.querySelectorAll('.button-item img');
-
-    function two() {
-        for (let i = 0; i < elements.length; i++) {
-            elements[i].style.flex = "50%"; // Gør hver button-item til 50% bredde
-        }
-    }
-
-    // Kald funktionen for at sikre to billeder vises side om side
-    two();
-});

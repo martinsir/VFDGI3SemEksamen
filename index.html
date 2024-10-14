@@ -16,7 +16,6 @@
         <a href="#"><img src="images/logo/ZealandLogoMoodle.png" alt="Zealand" class="logo"></a>
         <p class="navContainerTitle">Moodle Links</p> <!--   container titles    -->
         <div class="navbar">
-
             <a class="nav-item" href="https://moodle.zealand.dk/login/" target="_blank">
                 <i class="fa-solid fa-m"></i>
             </a>
@@ -29,79 +28,69 @@
             <a class="nav-item" href="https://studentid.zealand.dk/" target="_blank">
                 <i class="fa-solid fa-id-card"></i>
             </a>
-            <!-- ryk fra navbar?-->
             <a class="nav-item" href="pages/fredagsbar.html" target="_blank">
                 <i class="fa-solid fa-champagne-glasses"></i>
             </a>
-            <!-- ændre til værktøjer-->
             <a class="nav-item" href="https://office.zealand.dk/" target="_blank">
                 <i class="fa-solid fa-box-open"></i>
             </a>
             <a class="nav-item" href="https://moodle.zealand.dk/blocks/praxis_cohort_news/view.php?courseid=1&page=archive" target="_blank">
                 <i class="fa-solid fa-newspaper"></i>
             </a>
-
             <a class="nav-item" href="https://moodle.zealand.dk/user/files.php" target="_blank">
                 <i class="fa-solid fa-print"></i>
             </a>
-
             <a class="nav-item" href="https://moodle.zealand.dk/user/preferences.php" target="_blank">
                 <i class="fas fa-user"></i>
             </a>
+        </div>
 
+        <!-- Swipe indicator added here -->
+        <div class="navbar-indicator">
+            <div class="indicator-pill"></div>
         </div>
 
     </div>
 
     <div class="button-section">
-        <div class="button-item" onclick="startQuiz()">
-            <img src="images/icons/quiz.png" alt="Quiz Thumbnail" >
+        <div class="button-item" id="start-quiz" >
+            <img src="images/icons/quiz.png" alt="Quiz">
         </div>
-
         <div class="button-item">
-            <a href="pages/skema.html">
+            <a href="pages/skema.html" onclick="console.log('Skema link clicked!')">
                 <img src="images/icons/skema.png" alt="Skema">
             </a>
         </div>
-
         <div class="button-item">
             <a href="pages/wiseflow.html">
                 <img src="images/icons/wiseflow.png" alt="Wiseflow">
             </a>
         </div>
-
         <div class="button-item">
             <a href="pages/moodle.html">
                 <img src="images/icons/moodle.png" alt="Moodle">
             </a>
         </div>
-
         <div class="button-item">
             <a href="pages/minerum.html">
                 <img src="images/icons/rum.png" alt="Mine Rum">
             </a>
         </div>
-
-
         <div class="button-item">
             <a href="pages/fredagsbar.html">
                 <img src="images/icons/fredagsbar.png" alt="Fredagsbar">
             </a>
         </div>
-
-
         <div class="button-item">
             <a href="pages/kantine.html">
                 <img src="images/icons/kantine.png" alt="Kantine">
             </a>
         </div>
-
         <div class="button-item">
             <a href="pages/parkering.html">
                 <img src="images/icons/parkering.png" alt="Parkering">
             </a>
         </div>
-
         <div class="button-item">
             <a href="pages/nyheder.html">
                 <img src="images/icons/nyheder.png" alt="Nyheder">
@@ -109,8 +98,6 @@
         </div>
     </div>
 </div>
-
-
 
 <!-- Quiz Container -->
 <div class="quiz-container" id="quiz-container" style="display: none;">
@@ -120,16 +107,11 @@
     <h2 id="question">Spørgsmål vises her</h2>
     <div id="options-container"></div>
     <div id="feedback" style="display: none;"></div>
-
-
-
     <div class="button-container">
         <button id="next-btn" onclick="nextQuestion()">Næste</button>
         <div id="result"></div> <!-- Resultattavle -->
         <button id="home-btn" onclick="goToHome()">Tilbage til forsiden</button>
     </div>
-
-
     <!-- Timer sektionen -->
     <div id="timer">
         <span id="time-left"></span>
@@ -139,7 +121,6 @@
         </svg>
         <div id="time-change"></div>
     </div>
-
 </div>
 
 <main>
@@ -168,16 +149,17 @@
     </div>
 </main>
 
-
-
-
+<!-- Loading screen -->
+<div id="loading-screen" style="display: none;">
+    <div class="spinner"></div>
+    <p>Indlæser quiz...</p>
+</div>
 
 <footer>
     <!-- Footer  -->
 </footer>
 
-<script src="js/quiz.js"></script>
 <script src="js/taskHandler.js"></script>
-
+<script src="js/forsideHandler.js"></script>
 </body>
 </html>

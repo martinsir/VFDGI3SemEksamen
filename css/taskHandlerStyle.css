@@ -4,24 +4,27 @@
     bottom: 0;
     left: 0;
     width: 100%;
-    z-index: 2;
+    z-index: 3;
     text-align: center;
+    pointer-events: none;
 }
 
 /* The button starts at the bottom of the viewport */
 .dropup-btn {
-    background-color: #4CAF50;
-    color: white;
+    z-index: 10;
+    position: relative;
+    background-color: #000000;
+    color: #fff387;
     padding: 10px 20px;
     font-size: 16px;
     border: none;
     cursor: pointer;
     width: 100%;
     text-align: center;
-    position: absolute; /* Relative to .dropup */
     bottom: 0;
     left: 0;
     transition: transform 0.5s ease-in-out; /* Smooth movement */
+    pointer-events: auto;
 }
 
 .dropup-btn.active {
@@ -39,8 +42,8 @@
     overflow: hidden;
     background-color: #f9f9f9;
     transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
-    z-index: 1;
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 2;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 /* When the task handler is visible, expand it */
