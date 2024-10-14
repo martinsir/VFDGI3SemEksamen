@@ -58,7 +58,13 @@
 
 
 <main>
-    <div class="task-form">
+    <!-- Dropup button to toggle the task form -->
+    <div class="dropup">
+        <button class="dropup-btn" id="toggle-form-btn">Show Task Form</button>
+    </div>
+
+    <!-- Task Form -->
+    <div class="task-form" id="task-form">
         <input type="text" id="task" placeholder="Opgavebeskrivelse..." required>
         <select id="priority">
             <option value="top">Høj Prioritet</option>
@@ -68,10 +74,14 @@
         <input type="date" id="deadline" required>
         <button id="add-task"><i class="fa-solid fa-plus"></i></button>
     </div>
+
+    <!-- Task List -->
     <div class="task-list" id="task-list">
-        <!-- Tasks dynamically -->
+        <!-- Tasks will be dynamically added here -->
     </div>
 </main>
+
+
 
 
 

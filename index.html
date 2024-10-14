@@ -140,26 +140,35 @@
         <div id="time-change"></div>
     </div>
 
-
-
-
 </div>
 
 <main>
-    <div class="task-form">
-        <input type="text" id="task" placeholder="Opgavebeskrivelse..." required>
-        <select id="priority">
-            <option value="top">Høj Prioritet</option>
-            <option value="middle">Mellem Prioritet</option>
-            <option value="low">Lav Prioritet</option>
-        </select>
-        <input type="date" id="deadline" required>
-        <button id="add-task"><i class="fa-solid fa-plus"></i></button>
+    <!-- Dropup button to toggle the task handler -->
+    <div class="dropup">
+        <button class="dropup-btn" id="toggle-form-btn">Vis Opgaver</button>
     </div>
-    <div class="task-list" id="task-list">
-        <!-- Tasks dynamically -->
+
+    <!-- Task Handler (Form + List) -->
+    <div class="task-handler" id="task-handler">
+        <div class="task-form" id="task-form">
+            <input type="text" id="task" placeholder="Opgavebeskrivelse..." required>
+            <select id="priority">
+                <option value="top">Høj Prioritet</option>
+                <option value="middle">Mellem Prioritet</option>
+                <option value="low">Lav Prioritet</option>
+            </select>
+            <input type="date" id="deadline" required>
+            <button id="add-task"><i class="fa-solid fa-plus"></i></button>
+        </div>
+
+        <!-- Task List -->
+        <div class="task-list" id="task-list">
+            <!-- Tasks will be dynamically added here -->
+        </div>
     </div>
 </main>
+
+
 
 
 
