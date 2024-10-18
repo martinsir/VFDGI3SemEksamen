@@ -1,8 +1,40 @@
-document.addEventListener("DOMContentLoaded", function () {
-    console.log("DOMContentLoaded event fired");
+document.addEventListener("DOMContentLoaded", function() {
+    let stylesheetsLoaded = false;
+    const stylesheets = document.styleSheets;
+
+    // Tjek om stylesheets er fuldt indlæst
+    try {
+        for (let i = 0; i < stylesheets.length; i++) {
+            if (stylesheets[i].cssRules) {
+                stylesheetsLoaded = true;
+            }
+        }
+    } catch (e) {
+        console.warn("Stylesheets are not yet fully loaded.");
+    }
+
+    if (stylesheetsLoaded) {
+        console.log("Stylesheets loaded, proceeding with DOM manipulation.");
+        initForsideHandler(); // Kalder DOM-manipulationen her
+    } else {
+        window.addEventListener("load", function() {
+            console.log("Page fully loaded, executing DOM manipulation.");
+            initForsideHandler(); // DOM-manipulation efter fuld indlæsning
+        });
+    }
+});
+
+// Funktion der indeholder al forside-handler logik
+function initForsideHandler() {
+    console.log("DOMContentLoaded forsideHandler event fired");
 
     // Indlæs billeder sekventielt
     const images = document.querySelectorAll('.button-item img');
+    if (images.length > 0) {
+        console.log("Billeder fundet:", images.length);
+    } else {
+        console.warn("Ingen billeder fundet i forsideHandler");
+    }
 
     function loadImageSequentially(index) {
         if (index >= images.length) return;
@@ -13,6 +45,7 @@ document.addEventListener("DOMContentLoaded", function () {
             loadImageSequentially(index + 1);
         });
         img.addEventListener('error', () => {
+            console.error("Fejl ved indlæsning af billede:", img.src);
             loadImageSequentially(index + 1);
         });
         if (img.complete) {
@@ -20,88 +53,46 @@ document.addEventListener("DOMContentLoaded", function () {
             loadImageSequentially(index + 1);
         }
     }
-
     loadImageSequentially(0);
 
     // Event listener for quiz-knappen
-    document.getElementById("start-quiz").addEventListener("click", function () {
-        document.getElementById("loading-screen").style.display = "flex";
-        loadScript("js/quiz.js", function () {
-            startQuiz();
+    const quizButton = document.getElementById("start-quiz");
+    if (quizButton) {
+        console.log("Quiz button fundet.");
+        quizButton.addEventListener("click", function () {
+            console.log("Quiz button clicked.");
+
+            document.getElementById("loading-screen").style.display = "flex";
+
+            loadScript("js/quiz.js", function () {
+                setTimeout(function () {
+                    document.getElementById("loading-screen").style.display = "none";
+                    startQuiz(); // Start the quiz
+                }, 1000);
+            });
         });
-    });
+    } else {
+        console.warn('Quiz button with ID "start-quiz" not found. Ignoring quiz logic.');
+    }
 
-    // Swipe-funktionalitet til navbar
-    window.addEventListener("load", function () {
-        console.log("Window fully loaded");
+    // Funktion til at loade quiz.js scriptet asynkront
+    function loadScript(url, callback) {
+        let script = document.createElement("script");
+        script.type = "text/javascript";
+        script.src = url;
+        script.async = true; // Load asynchronously
+        script.onload = function () {
+            console.log(`Script ${url} loaded successfully`);
+            callback();
+        };
+        script.onerror = function () {
+            alert('Kunne ikke loade quiz. Tjek quiz.js filens sti.');
+            document.getElementById("loading-screen").style.display = "none";
+        };
+        document.head.appendChild(script);
+    }
 
-        // Swipe-funktionalitet til navbar
-        const navbar = document.querySelector('.navbar');
-        const leftArrow = document.querySelector('.left-arrow');
+   
 
-        if (navbar) {
-            let startX, scrollLeft, isDown = false;
-
-            // Mus-baserede swipe events (til desktop)
-            navbar.addEventListener('mousedown', (e) => {
-                isDown = true;
-                startX = e.pageX - navbar.offsetLeft;
-                scrollLeft = navbar.scrollLeft;
-            });
-
-            navbar.addEventListener('mouseleave', () => {
-                isDown = false;
-            });
-
-            navbar.addEventListener('mouseup', () => {
-                isDown = false;
-            });
-
-            navbar.addEventListener('mousemove', (e) => {
-                if (!isDown) return;
-                e.preventDefault();
-                const x = e.pageX - navbar.offsetLeft;
-                const walk = (x - startX) * 2;
-                navbar.scrollLeft = scrollLeft - walk;
-                updateArrows();
-            });
-
-            // Touch-baserede swipe events (til mobil)
-            navbar.addEventListener('touchstart', (e) => {
-                isDown = true;
-                startX = e.touches[0].pageX - navbar.offsetLeft;
-                scrollLeft = navbar.scrollLeft;
-            });
-
-            navbar.addEventListener('touchend', () => {
-                isDown = false;
-            });
-
-            navbar.addEventListener('touchmove', (e) => {
-                if (!isDown) return;
-                e.preventDefault();
-                const x = e.touches[0].pageX - navbar.offsetLeft;
-                const walk = (x - startX) * 2;
-                navbar.scrollLeft = scrollLeft - walk;
-                updateArrows();
-            });
-
-            // Blink venstre pil ved indlæsning og skjul efter 3 sekunder
-            setTimeout(() => {
-                leftArrow.style.opacity = '0'; // Skjul venstre pil
-            }, 3000);
-
-            function updateArrows() {
-                const scrollPosition = navbar.scrollLeft;
-                const maxScroll = navbar.scrollWidth - navbar.clientWidth;
-
-                if (scrollPosition > 0) {
-                    leftArrow.style.opacity = '0'; // Skjul venstre pil når man har scrollet
-                }
-            }
-        } else {
-            console.error("Navbar element could not be found.");
-        }
-    });
-
-});
+    console.log("ForsideHandler.js fuldført."); // Log for at vise, at hele scriptet kørte
+}
