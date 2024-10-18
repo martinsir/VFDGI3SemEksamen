@@ -1,8 +1,41 @@
-document.addEventListener("DOMContentLoaded", function () {
-    console.log("DOMContentLoaded event fired");
+document.addEventListener("DOMContentLoaded", function() {
+    let stylesheetsLoaded = false;
+    const stylesheets = document.styleSheets;
+
+    // Tjek om stylesheets er fuldt indlæst
+    try {
+        for (let i = 0; i < stylesheets.length; i++) {
+            if (stylesheets[i].cssRules) {
+                stylesheetsLoaded = true;
+            }
+        }
+    } catch (e) {
+        console.warn("Stylesheets are not yet fully loaded.");
+    }
+
+    if (stylesheetsLoaded) {
+        console.log("Stylesheets loaded, proceeding with DOM manipulation.");
+        initForsideHandler(); // Kalder DOM-manipulationen her
+    } else {
+        window.addEventListener("load", function() {
+            console.log("Page fully loaded, executing DOM manipulation.");
+            initForsideHandler(); // DOM-manipulation efter fuld indlæsning
+        });
+    }
+});
+
+// Funktion der indeholder al forside-handler logik
+function initForsideHandler() {
+    console.log("DOMContentLoaded forsideHandler event fired");
 
     // Indlæs billeder sekventielt
     const images = document.querySelectorAll('.button-item img');
+    if (images.length > 0) {
+        console.log("Billeder fundet:", images.length);
+    } else {
+        console.warn("Ingen billeder fundet i forsideHandler");
+    }
+
     function loadImageSequentially(index) {
         if (index >= images.length) return;
 
@@ -12,6 +45,7 @@ document.addEventListener("DOMContentLoaded", function () {
             loadImageSequentially(index + 1);
         });
         img.addEventListener('error', () => {
+            console.error("Fejl ved indlæsning af billede:", img.src);
             loadImageSequentially(index + 1);
         });
         if (img.complete) {
@@ -21,117 +55,44 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     loadImageSequentially(0);
 
-    // Event listener for quiz-knappen (ensure the element exists before attaching the event)
+    // Event listener for quiz-knappen
     const quizButton = document.getElementById("start-quiz");
     if (quizButton) {
+        console.log("Quiz button fundet.");
         quizButton.addEventListener("click", function () {
-            // Show the loading screen only when the quiz button is clicked
+            console.log("Quiz button clicked.");
+
             document.getElementById("loading-screen").style.display = "flex";
 
-            // Load the quiz.js script and start the quiz after loading
             loadScript("js/quiz.js", function () {
                 setTimeout(function () {
-                    // Hide the loading screen once the quiz.js is loaded
                     document.getElementById("loading-screen").style.display = "none";
                     startQuiz(); // Start the quiz
-                }, 1000); // Simulate loading delay
+                }, 1000);
             });
         });
     } else {
-        console.log('Quiz button with ID "start-quiz" not found. Ignoring quiz logic.');
+        console.warn('Quiz button with ID "start-quiz" not found. Ignoring quiz logic.');
     }
 
-    // Function to load the quiz script
+    // Funktion til at loade quiz.js scriptet asynkront
     function loadScript(url, callback) {
         let script = document.createElement("script");
         script.type = "text/javascript";
         script.src = url;
-
+        script.async = true; // Load asynchronously
         script.onload = function () {
-            callback(); // Call the callback once the script is loaded
+            console.log(`Script ${url} loaded successfully`);
+            callback();
         };
-
         script.onerror = function () {
-            alert('Could not load the quiz. Check the quiz.js file path.');
-            document.getElementById("loading-screen").style.display = "none"; // Hide loading screen in case of an error
+            alert('Kunne ikke loade quiz. Tjek quiz.js filens sti.');
+            document.getElementById("loading-screen").style.display = "none";
         };
-
-        document.head.appendChild(script); // Append the script to the head
+        document.head.appendChild(script);
     }
 
-    // Swipe functionality for the navbar (ensure elements exist before working with them)
-    const navbar = document.querySelector('.navbar');
-    const leftArrow = document.querySelector('.left-arrow');
+   
 
-    if (navbar && leftArrow) {
-        let startX, scrollLeft, isDown = false;
-
-        // Check if the arrow has already been shown (stored in localStorage)
-        const arrowShown = localStorage.getItem('arrowShown');
-
-        if (!arrowShown) {
-            // Gradually hide left arrow with CSS transition after 3 seconds
-            setTimeout(() => {
-                if (leftArrow) {
-                    leftArrow.style.opacity = '0'; // Hide left arrow
-                    localStorage.setItem('arrowShown', 'true'); // Mark the arrow as shown
-                }
-            }, 3000);
-        } else {
-            leftArrow.style.opacity = '0'; // Directly hide the arrow if it has been shown
-        }
-
-        // Mouse-based swipe events (for desktop)
-        navbar.addEventListener('mousedown', (e) => {
-            isDown = true;
-            startX = e.pageX - navbar.offsetLeft;
-            scrollLeft = navbar.scrollLeft;
-        });
-
-        navbar.addEventListener('mouseleave', () => {
-            isDown = false;
-        });
-
-        navbar.addEventListener('mouseup', () => {
-            isDown = false;
-        });
-
-        navbar.addEventListener('mousemove', (e) => {
-            if (!isDown) return;
-            e.preventDefault();
-            const x = e.pageX - navbar.offsetLeft;
-            const walk = (x - startX) * 2;
-            navbar.scrollLeft = scrollLeft - walk;
-            updateArrows();
-        });
-
-        // Touch-based swipe events (for mobile)
-        navbar.addEventListener('touchstart', (e) => {
-            isDown = true;
-            startX = e.touches[0].pageX - navbar.offsetLeft;
-            scrollLeft = navbar.scrollLeft;
-        });
-
-        navbar.addEventListener('touchend', () => {
-            isDown = false;
-        });
-
-        navbar.addEventListener('touchmove', (e) => {
-            if (!isDown) return;
-            e.preventDefault();
-            const x = e.touches[0].pageX - navbar.offsetLeft;
-            const walk = (x - startX) * 2;
-            navbar.scrollLeft = scrollLeft - walk;
-            updateArrows();
-        });
-
-        function updateArrows() {
-            const scrollPosition = navbar.scrollLeft;
-            if (scrollPosition > 0 && leftArrow) {
-                leftArrow.style.opacity = '0'; // Hide left arrow after scrolling
-            }
-        }
-    } else {
-        console.log("Navbar or leftArrow element not found. Ignoring navbar logic.");
-    }
-});
+    console.log("ForsideHandler.js fuldført."); // Log for at vise, at hele scriptet kørte
+}
