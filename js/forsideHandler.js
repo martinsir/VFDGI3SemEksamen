@@ -1,6 +1,24 @@
 document.addEventListener("DOMContentLoaded", function () {
     console.log("DOMContentLoaded event fired");
 
+    // Funktion til at loade eksterne scripts dynamisk
+    function loadScript(src, callback) {
+        console.log("Forsøger at loade script fra: " + src);
+        var script = document.createElement('script');
+        script.src = src;
+        script.onload = function() {
+            console.log('Scriptet er indlæst fra: ' + src);
+            callback(); // Kald callback når scriptet er loaded
+            document.getElementById("loading-screen").style.display = "none"; // Skjul loading screen når scriptet er færdig indlæst
+        };
+        script.onerror = function() {
+            console.error('Fejl: Kunne ikke loade scriptet fra ' + src);
+            alert('Kunne ikke loade quiz. Tjek stien til quiz.js.');
+            document.getElementById("loading-screen").style.display = "none"; // Skjul loading screen ved fejl
+        };
+        document.head.appendChild(script);
+    }
+
     // Indlæs billeder sekventielt
     const images = document.querySelectorAll('.button-item img');
 
@@ -21,87 +39,19 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    loadImageSequentially(0);
+    loadImageSequentially(0); // Start indlæsning af billeder
 
     // Event listener for quiz-knappen
-    document.getElementById("start-quiz").addEventListener("click", function () {
-        document.getElementById("loading-screen").style.display = "flex";
-        loadScript("js/quiz.js", function () {
-            startQuiz();
+    const quizButton = document.getElementById("start-quiz");
+    if (quizButton) {
+        quizButton.addEventListener("click", function () {
+            document.getElementById("loading-screen").style.display = "flex"; // Vis loading screen
+            loadScript("js/quiz.js", function () {
+                startQuiz(); // Start quiz når quiz.js er loaded
+                document.getElementById("loading-screen").style.display = "none"; // Skjul loading screen når quiz starter
+            });
         });
-    });
-
-    // Swipe-funktionalitet til navbar
-    window.addEventListener("load", function () {
-        console.log("Window fully loaded");
-
-        // Swipe-funktionalitet til navbar
-        const navbar = document.querySelector('.navbar');
-        const leftArrow = document.querySelector('.left-arrow');
-
-        if (navbar) {
-            let startX, scrollLeft, isDown = false;
-
-            // Mus-baserede swipe events (til desktop)
-            navbar.addEventListener('mousedown', (e) => {
-                isDown = true;
-                startX = e.pageX - navbar.offsetLeft;
-                scrollLeft = navbar.scrollLeft;
-            });
-
-            navbar.addEventListener('mouseleave', () => {
-                isDown = false;
-            });
-
-            navbar.addEventListener('mouseup', () => {
-                isDown = false;
-            });
-
-            navbar.addEventListener('mousemove', (e) => {
-                if (!isDown) return;
-                e.preventDefault();
-                const x = e.pageX - navbar.offsetLeft;
-                const walk = (x - startX) * 2;
-                navbar.scrollLeft = scrollLeft - walk;
-                updateArrows();
-            });
-
-            // Touch-baserede swipe events (til mobil)
-            navbar.addEventListener('touchstart', (e) => {
-                isDown = true;
-                startX = e.touches[0].pageX - navbar.offsetLeft;
-                scrollLeft = navbar.scrollLeft;
-            });
-
-            navbar.addEventListener('touchend', () => {
-                isDown = false;
-            });
-
-            navbar.addEventListener('touchmove', (e) => {
-                if (!isDown) return;
-                e.preventDefault();
-                const x = e.touches[0].pageX - navbar.offsetLeft;
-                const walk = (x - startX) * 2;
-                navbar.scrollLeft = scrollLeft - walk;
-                updateArrows();
-            });
-
-            // Blink venstre pil ved indlæsning og skjul efter 3 sekunder
-            setTimeout(() => {
-                leftArrow.style.opacity = '0'; // Skjul venstre pil
-            }, 3000);
-
-            function updateArrows() {
-                const scrollPosition = navbar.scrollLeft;
-                const maxScroll = navbar.scrollWidth - navbar.clientWidth;
-
-                if (scrollPosition > 0) {
-                    leftArrow.style.opacity = '0'; // Skjul venstre pil når man har scrollet
-                }
-            }
-        } else {
-            console.error("Navbar element could not be found.");
-        }
-    });
-
+    } else {
+        console.error('Quiz knappen med ID "start-quiz" blev ikke fundet.');
+    }
 });

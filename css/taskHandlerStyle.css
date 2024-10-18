@@ -33,7 +33,7 @@
 
 /* Task handler section (initially hidden with a max height of 0) */
 .task-handler {
-    position: fixed; /* Fixed at the bottom of the screen */
+    position: fixed !important; /* Fixed at the bottom of the screen */
     bottom: 0;
     left: 0;
     width: 100%;
@@ -169,6 +169,33 @@
 .dropup.open .dropup-btn {
     transform: translateY(-50vh); /* Move the button along with the content */
 }
+.dropup.open {
+    pointer-events: auto;
+}
+
+/* Pil styling */
+.left-arrow {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    width: 15px;
+    height: 15px;
+    background-image: url('../images/icons/left-arrow.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    transform: translateY(-50%);
+    z-index: 30;
+    opacity: 1;
+    transition: opacity 0.5s ease;
+
+}
+
+
+.navbar-container.hide-left .left-arrow {
+    display: none;
+}
+
 
 /* Extra responsiveness adjustments */
 @media (max-width: 768px) {
